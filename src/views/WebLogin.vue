@@ -58,10 +58,12 @@ export default {
             userpsd: this.$md5(this.form.password)
           })
             .then(successResponse => {
-              if (successResponse.data.code === '0') {
+              // eslint-disable-next-line no-debugger
+              debugger
+              if (successResponse.data.code === 0) {
                 this.$store.commit('login', successResponse)
                 // 如果不加这句，发现切换用户的时候，window.localStorage的user值变化了，但是_this.$store.state.user 里的没有变，必须在这里显示定义一番
-                // this.$store.state.user = successResponse.data.data;
+                // this.$store.state.user = successResponse.data.data
                 var path = this.$route.query.redirect
                 this.$router.replace({
                   path: path === '/' || path === undefined ? '/home' : path

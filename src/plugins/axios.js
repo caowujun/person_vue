@@ -10,6 +10,8 @@ import axios from 'axios'
 import router from '@/router'
 import store from '@/store'
 
+Vue.prototype.$http = axios
+
 const config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
   // timeout: 60 * 1000, // Timeout
@@ -35,7 +37,7 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function (response) {
     // Do something with response data
-    if (response.data.code === -1 && response.data.msg == '400') {
+    if (response.data.code === -1 && response.data.msg === '400') {
       if (window.localStorage.getItem('token')) {
         store.commit('logout')
         router.replace({

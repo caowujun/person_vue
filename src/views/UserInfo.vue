@@ -66,7 +66,7 @@ export default {
         }
       })
         .then((successResponse) => {
-          if (successResponse.data.code == '0') {
+          if (successResponse.data.code === '0') {
             this.form = successResponse.data.data
           }
         })

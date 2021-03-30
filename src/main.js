@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import * as axios from './plugins/axios'
+import './plugins/axios'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -16,7 +16,7 @@ import local from '@/assets/js/local.js'
 import extend from '@/assets/js/extend.js'
 
 Vue.prototype.$echarts = echarts
-Vue.prototype.$http = axios
+// Vue.prototype.$http = axios
 Vue.prototype.$notify = _notify
 Vue.prototype.$extend = extend
 Vue.prototype.$apiList = apiList

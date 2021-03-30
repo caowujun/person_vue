@@ -30,7 +30,7 @@ const routes = [{
 {
   path: '/home',
   name: 'Home',
-  // component: () => import(/* webpackChunkName: "about" */ '../views/WebLogin.vue'),
+  component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
   // home页面并不需要被访问
   redirect: '/dashboard',
   children: [{
