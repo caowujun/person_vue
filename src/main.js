@@ -8,16 +8,25 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import * as echarts from 'echarts'
 import md5 from 'js-md5'
+import i18n from '@/assets/lang'
 
 // 以下是自定义的
 import _notify from '@/assets/js/_notify.js'
 import apiList from '@/assets/js/api.js'
 import local from '@/assets/js/local.js'
 import extend from '@/assets/js/extend.js'
+import customconfig from '@/assets/js/customconfig.js'
+
+// import lang_en from 'element-ui/lib/locale/lang/en'
+import lang from 'element-ui/lib/locale/lang/zh-CN'
+import locale from 'element-ui/lib/locale'
+// 设置语言
+locale.use(lang)
 
 Vue.config.productionTip = false
+
 Vue.use(ElementUI)
-Vue.use(axios)
+// Vue.use(axios)
 
 Vue.prototype.$echarts = echarts
 Vue.prototype.$http = axios
@@ -27,6 +36,7 @@ Vue.prototype.$apiList = apiList
 Vue.prototype.$local = local
 Vue.prototype.$qs = qs
 Vue.prototype.$md5 = md5
+Vue.prototype.$customconfig = customconfig
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
@@ -85,5 +95,6 @@ axios.interceptors.response.use(
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')

@@ -1,12 +1,18 @@
 <template>
-  <el-menu :default-active="activeIndex"   mode="horizontal" @select="handleSelect"    background-color="#545c64"
+  <el-menu :default-active="activeIndex"   mode="horizontal" @select="handleSelect"    background-color="#2C3E50"
    text-color="#fff" active-text-color="#ffd04b" router>
-    <span class="webtitle">{{webtitle}}</span>
-    <el-submenu index="2" class="topmenu">
-      <template slot="title"> {{cnname}}</template>
-      <el-menu-item @click="showuserinfo">个人信息</el-menu-item>
-      <el-menu-item @click="changepsd">修改密码</el-menu-item>
-      <el-menu-item @click="loginout">注销登录</el-menu-item>
+      <!-- 225c64 -->
+<img style="height:40px;width:40px;float:left;margin-top: 10px;" src="../assets/logo.png" />
+    <span style=" float:left;padding:20px;color:#ffffff;font-size: 16px;">{{$t('navartop.title')}}</span>
+    <el-submenu index="2" style=" float: right;padding-right: 0px;">
+      <template slot="title">{{$t('navartop.hello')}} {{cnname}}</template>
+      <el-menu-item @click="showuserinfo">{{$t('navartop.personinfo')}}</el-menu-item>
+      <el-menu-item @click="changepsd">{{$t('navartop.pwdmodify')}}</el-menu-item>
+      <el-menu-item @click="loginout">{{$t('navartop.logout')}}</el-menu-item>
+    </el-submenu>
+  <el-submenu index="3" style=" float: right;padding-right: 0px;" >
+      <template slot="title">{{$t('navartop.changei18')}}</template>
+         <el-menu-item v-for="item in options" :key="item.value" @click="changei18(item.value)"  :disabled="isCurrentLang(item.value)">{{item.label}}</el-menu-item>
     </el-submenu>
   </el-menu>
 
@@ -18,11 +24,31 @@ export default {
     return {
       activeIndex: '',
       cnname: '',
-      webtitle: ''
+      // webtitle: '',
+      options: [
+        {
+          value: 'zh',
+          label: '中文'
+        }, {
+          value: 'en',
+          label: 'English'
+        }, {
+          value: 'ja',
+          label: '日本語'
+        }
+      ]
     }
   },
   mounted () {
     this.load()
+  },
+  computed:
+  {
+    isCurrentLang () {
+      return function (value) {
+        return localStorage.getItem('lang') === value
+      }
+    }
   },
   methods: {
     handleSelect (key, keyPath) {
@@ -40,29 +66,33 @@ export default {
         path: '/login'
       })
     },
+    changei18 (lang) {
+      localStorage.setItem('lang', lang)
+      this.$i18n.locale = lang
+      window.location.reload()
+    },
     load () {
-      this.cnname = '你好，' + this.$store.state.user.cnname
-
-      this.$http.get(this.$apiList.loadcustomconfigByKey, {
-        params: {
-          configkey: 'webtitle'
-        }
-      })
-        .then((successResponse) => {
-          if (successResponse.data.code === 0) {
-            this.webtitle = successResponse.data.data.configvalue
-          }
-        })
-        .catch((error) => {
-          console.log(error) // 异常
-        })
+      this.cnname = this.$store.state.user.cnname
+      // this.$http.get(this.$apiList.loadcustomconfigByKey, {
+      //   params: {
+      //     configkey: 'webtitle'
+      //   }
+      // })
+      //   .then((successResponse) => {
+      //     if (successResponse.data.code === 0) {
+      //       this.webtitle = successResponse.data.data.configvalue
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.log(error) // 异常
+      //   })
     }
   }
 }
 </script>
 
 <style>
-.webtitle
+/* .webtitle
 {
   float:left;padding:20px;color:#ffffff;font-size: 18px;
 }
@@ -70,5 +100,5 @@ export default {
 .topmenu
 {
 float: right;padding-right: 0px;
-}
+} */
 </style>

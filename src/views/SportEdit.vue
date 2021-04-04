@@ -76,7 +76,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             successResponse.data.data.status = successResponse.data.data.status !== 0
 
             this.form = successResponse.data.data
@@ -94,7 +94,7 @@ export default {
           this.$http.post(this.$apiList.saveuser, this.form)
             .then(successResponse => {
               console.log(successResponse)
-              if (successResponse.data.code === '0') {
+              if (successResponse.data.code === 0) {
                 this.$notify.success()
                 this.userid = successResponse.data.data
               } else {

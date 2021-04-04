@@ -57,7 +57,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.userdata = successResponse.data.data
           }
         })
@@ -71,7 +71,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.tree1loaded = false
             this.$refs.usertree.setCheckedKeys(successResponse.data.data.map(f => f.userid))
             var that = this
@@ -94,7 +94,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.menudata = successResponse.data.data
           }
         })
@@ -109,7 +109,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.tree2loaded = false
             this.$refs.menutree.setCheckedKeys(successResponse.data.data.map(f => f.menuid))
             var that = this
@@ -133,7 +133,7 @@ export default {
         })
           .then(successResponse => {
             console.log(successResponse)
-            if (successResponse.data.code === '0') {
+            if (successResponse.data.code === 0) {
               this.$notify.success()
             } else {
               this.$notify.warning()
@@ -153,7 +153,7 @@ export default {
         })
           .then(successResponse => {
             console.log(successResponse)
-            if (successResponse.data.code === '0') {
+            if (successResponse.data.code === 0) {
               this.$notify.success()
             } else {
               this.$notify.warning()

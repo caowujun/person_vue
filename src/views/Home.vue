@@ -1,19 +1,19 @@
 <template>
   <el-container>
-    <el-header class="myheader" height="61px">
-      <nav-menu @show-userinfo="dialogFormVisible1=true" @change-psd="dialogFormVisible2=true"  ></nav-menu>
+    <el-header class="myheader" height="62px">
+      <nav-menu @show-userinfo="dialogFormVisible1=true" @change-psd="dialogFormVisible2=true"></nav-menu>
     </el-header>
 
-    <el-container  style="border-bottom:1px solid #DCDFE6" >
-      <el-aside class="myside" width="200px">
-        <side-menu  ></side-menu>
+    <el-container style="border-bottom:1px solid #DCDFE6;">
+      <el-aside class="myside" width="205px">
+        <side-menu></side-menu>
       </el-aside>
       <el-main style="padding:10px">
         <router-view />
       </el-main>
     </el-container>
 
-    <el-footer  >
+    <el-footer>
       <foot-bar></foot-bar>
     </el-footer>
     <user-info :dialogFormVisible="dialogFormVisible1" @close-dialog="dialogFormVisible1=false"></user-info>
@@ -36,12 +36,9 @@ export default {
       dialogFormVisible2: false
     }
   },
-  mounted () {
-  },
-  computed: {
-  },
-  methods: {
-  },
+  mounted () {},
+  computed: {},
+  methods: {},
   components: {
     NavMenu,
     SideMenu,
@@ -55,11 +52,10 @@ export default {
 <style scoped>
   .myheader {
     padding: 0;
-
+    border-bottom: 1px solid #DCDFE6;
   }
 
   .myside {
     border-right: solid 1px #e6e6e6;
-    background-color:rgb(84, 92, 100)
   }
 </style>

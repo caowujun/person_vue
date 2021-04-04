@@ -72,7 +72,7 @@ export default {
           params: {}
         })
           .then((successResponse) => {
-            if (successResponse.data.code === '0') {
+            if (successResponse.data.code === 0) {
               const x = successResponse.data.data.map(f => f.x)
               const y = successResponse.data.data.map(f => f.y)
               this.$local.showChart(myChart, '', ['对比'], 'bar', x, y)
@@ -94,7 +94,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.today = successResponse.data.data
           }
         })

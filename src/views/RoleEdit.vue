@@ -76,7 +76,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.parentlist = successResponse.data.data
           }
         })
@@ -92,7 +92,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             successResponse.data.data.status = successResponse.data.data.status !== 0
 
             this.form = successResponse.data.data
@@ -110,7 +110,7 @@ export default {
           this.$http.post(this.$apiList.saverole, this.form)
             .then(successResponse => {
               console.log(successResponse)
-              if (successResponse.data.code === '0') {
+              if (successResponse.data.code === 0) {
                 this.$notify.success()
                 this.roleid = successResponse.data.data
               } else {

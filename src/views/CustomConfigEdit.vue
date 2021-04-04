@@ -79,7 +79,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             successResponse.data.data.isenable = successResponse.data.data.isenable !== 0
             this.form = successResponse.data.data
           }
@@ -95,7 +95,7 @@ export default {
           this.$http.post(this.$apiList.savecustomconfig, this.form)
             .then(successResponse => {
               console.log(successResponse)
-              if (successResponse.data.code === '0') {
+              if (successResponse.data.code === 0) {
                 this.$notify.success()
                 this.goBack()
               } else {

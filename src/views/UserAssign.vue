@@ -39,7 +39,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.roledata = successResponse.data.data
           }
         })
@@ -53,7 +53,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.tree1loaded = false
             this.$refs.roletree.setCheckedKeys(successResponse.data.data.map(f => f.roleid))
             var that = this
@@ -78,7 +78,7 @@ export default {
         })
           .then(successResponse => {
             console.log(successResponse)
-            if (successResponse.data.code === '0') {
+            if (successResponse.data.code === 0) {
               this.$notify.success()
             } else {
               this.$notify.warning()

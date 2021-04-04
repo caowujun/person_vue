@@ -38,14 +38,15 @@ const apilist = {
   // updatecustomconfigstatus: "/api/customconfig/updateStatus.do", //是否禁用某个配置项
   loadcustomconfigbyid: '/api/customconfig/selectOne.do', // 编辑用
   insertcustomconfig: '/api/customconfig/insert.do', // 新增或者更新
+  loadcustomconfigByKey: '/api/customconfig/findByKey.do', // 根据key获取自定义的值
   updatecustomconfig: '/api/customconfig/update.do', // 新增或者更新
   // 枚举
-  enumconfigpage: '/api/enumconfig/selectAll.do', // 用户自定义分页page
-  // updateenumconfigstatus: "/api/enumconfig/updateStatus.do", //是否禁用某个配置项
-  loadenumconfigbyid: '/api/enumconfig/selectOne.do', // 编辑用
-  loadenumconfigByKey: '/api/enumconfig/findByKey.do', // 根据key获取自定义的值
-  insertenumconfig: '/api/enumconfig/insert.do', // 新增或者更新
-  updateenumconfig: '/api/enumconfig/update.do' // 新增或者更新
+  enumconfigpage: '/api/enumtypes/selectAll.do', // 用户自定义分页page
+  // updateenumconfigstatus: "/api/enumtypes/updateStatus.do", //是否禁用某个配置项
+  loadenumconfigbyid: '/api/enumtypes/selectOne.do', // 编辑用
+  loadenumconfigByKey: '/api/enumtypes/findByKey.do', // 根据key获取自定义的值
+  insertenumconfig: '/api/enumtypes/insert.do', // 新增或者更新
+  updateenumconfig: '/api/enumtypes/update.do' // 新增或者更新
 }
 
 export default apilist

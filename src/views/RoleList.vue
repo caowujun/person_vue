@@ -10,9 +10,12 @@
         <el-input v-model="formInline.title" placeholder="名称" class="input150"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" plain @click="onSubmit"  icon="el-icon-search">查询</el-button>
+        <!-- <el-button type="primary" plain @click="onSubmit"  icon="el-icon-search">查询</el-button>
         <el-button type="warning" plain @click="onReset"  icon="el-icon-refresh">重置</el-button>
-        <el-button type="success" plain @click="onAdd"   icon="el-icon-circle-plus-outline">新增</el-button>
+        <el-button type="success" plain @click="onAdd"   icon="el-icon-circle-plus-outline">新增</el-button> -->
+        <el-button type="primary" plain @click="onSubmit" size="small" icon="el-icon-search">  {{$t('form.search')}}</el-button>
+        <el-button type="warning" plain @click="onReset" size="small" icon="el-icon-refresh">  {{$t('form.reset')}}</el-button>
+        <el-button type="success" plain @click="onAdd" size="small" icon="el-icon-circle-plus-outline">  {{$t('form.add')}}</el-button>
       </el-form-item>
     </el-form>
     <el-table :data="tableData" style="width: 100%" border stripe size="small" v-loading="loading" element-loading-text="拼命加载中"
@@ -107,7 +110,7 @@ export default {
         }
       })
         .then((successResponse) => {
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.tableData = successResponse.data.data.records
             this.total = successResponse.data.data.total
           }
@@ -126,7 +129,7 @@ export default {
       })
         .then(successResponse => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             row.status = row.status === 0 ? 1 : 0
             this.$notify.success()
           } else {

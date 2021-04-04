@@ -96,7 +96,7 @@ export default {
             confirmnewpsd: this.$md5(this.form.confirmnewpsd)
           })
             .then(successResponse => {
-              if (successResponse.data.code === '0') {
+              if (successResponse.data.code === 0) {
                 this.$notify.success()
 
                 this.close()
@@ -131,7 +131,7 @@ export default {
       })
         .then((successResponse) => {
           console.log(successResponse)
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.form = successResponse.data.data
           }
         })

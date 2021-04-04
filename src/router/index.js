@@ -17,42 +17,43 @@ const routes = [{
   component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
   // home页面并不需要被访问
   redirect: '/dashboard',
-  children: [{
-    path: '/dashboard',
-    name: 'DashBoard',
-    component: () => import(/* webpackChunkName: "about" */ '../views/DashBoard.vue'),
-    meta: {
-      requireAuth: true
-    }
-  }, {
-    path: '/moneylist',
-    name: 'MoneyList',
-    component: () => import(/* webpackChunkName: "about" */ '../views/MoneyList.vue'),
-    meta: {
-      requireAuth: true
-    }
-  }, {
-    path: '/moneyedit',
-    name: 'MoneyEdit',
-    component: () => import(/* webpackChunkName: "about" */ '../views/MoneyEdit.vue'),
-    meta: {
-      requireAuth: true
-    }
-  }, {
-    path: '/gasolinelist',
-    name: 'SportList',
-    component: () => import(/* webpackChunkName: "about" */ '../views/SportList.vue'),
-    meta: {
-      requireAuth: true
-    }
-  }, {
-    path: '/sportedit',
-    name: 'SportEdit',
-    component: () => import(/* webpackChunkName: "about" */ '../views/SportEdit.vue'),
-    meta: {
-      requireAuth: true
-    }
-  },, {
+  children: [
+    {
+      path: '/dashboard',
+      name: 'DashBoard',
+      component: () => import(/* webpackChunkName: "about" */ '../views/DashBoard.vue'),
+      meta: {
+        requireAuth: true
+      }
+    }, {
+      path: '/moneylist',
+      name: 'MoneyList',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MoneyList.vue'),
+      meta: {
+        requireAuth: true
+      }
+    }, {
+      path: '/moneyedit',
+      name: 'MoneyEdit',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MoneyEdit.vue'),
+      meta: {
+        requireAuth: true
+      }
+    }, {
+      path: '/gasolinelist',
+      name: 'SportList',
+      component: () => import(/* webpackChunkName: "about" */ '../views/SportList.vue'),
+      meta: {
+        requireAuth: true
+      }
+    }, {
+      path: '/sportedit',
+      name: 'SportEdit',
+      component: () => import(/* webpackChunkName: "about" */ '../views/SportEdit.vue'),
+      meta: {
+        requireAuth: true
+      }
+    }, {
       path: '/sportlist',
       name: 'SportList',
       component: () => import(/* webpackChunkName: "about" */ '../views/SportList.vue'),

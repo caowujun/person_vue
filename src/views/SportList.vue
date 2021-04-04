@@ -74,7 +74,7 @@ export default {
         })
           .then(successResponse => {
             console.log(successResponse)
-            if (successResponse.data.code === '0') {
+            if (successResponse.data.code === 0) {
               this.loadList()
               this.$notify.success()
             } else {
@@ -105,7 +105,7 @@ export default {
         }
       })
         .then((successResponse) => {
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.tableData = successResponse.data.data.records
             this.total = successResponse.data.data.total
           }
