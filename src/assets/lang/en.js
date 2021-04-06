@@ -50,6 +50,7 @@ export default {
     delete: 'Delete',
     view: 'View',
     search: 'Serch',
+    cancel: 'Cancel',
     dateplaceholder: 'Select Date',
     areaplaceholder: 'Please enter content'
   },

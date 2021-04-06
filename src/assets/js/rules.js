@@ -200,6 +200,18 @@ export const validateDate = (rule, value, callback) => {
     callback()
   }
 }
+
+export const validateMoney = (rule, value, callback, message) => {
+  // if (!value) {
+  //   return callback(new Error('请输入金额'))
+  // }
+  if (!/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/.test(value)) {
+    callback(new Error(message))
+  } else {
+    callback()
+  }
+}
+
 export const validateCode = (rule, value, callback) => {
   if (!value) {
     return callback(new Error('请输入账号'))

@@ -48,6 +48,7 @@ export default {
     delete: '删除',
     view: '查看',
     search: '查询',
+    cancel: '取消',
     dateplaceholder: '选择日期',
     areaplaceholder: '请输入内容',
     recorddate: '记录日期'

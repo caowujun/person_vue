@@ -37,6 +37,7 @@ export default {
     delete: '削除',
     view: '見る',
     search: 'お問い合わせ',
+    cancel: 'キャンセル',
     dateplaceholder: '日付を選択',
     areaplaceholder: 'コンテンツを入力してください',
     Enable: '启用',

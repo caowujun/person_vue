@@ -106,7 +106,7 @@ export default {
         }
       })
         .then((successResponse) => {
-          if (successResponse.data.code === '0') {
+          if (successResponse.data.code === 0) {
             this.moneyclassifications = successResponse.data.data
           }
         })
@@ -117,9 +117,9 @@ export default {
     dateFormat (row, column, cellValue, index) {
       return this.$local.dateFormaterLong(cellValue)
     },
-     mcFormat (row, column, cellValue, index) {
+    mcFormat (row, column, cellValue, index) {
       return this.$local.dateFormaterLong(cellValue)
-    }, 
+    },
     handleEdit (index, row) {
       this.$router.replace({
         name: 'MoneyEdit',
