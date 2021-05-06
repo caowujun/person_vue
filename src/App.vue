@@ -119,4 +119,8 @@ export default {
     text-align: right;
   }
   /* 可展开table,在页面内部不起作用 */
+
+ from /deep/ .input380 {
+    width: 380px;
+  }
 </style>
