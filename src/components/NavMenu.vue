@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       activeIndex: '',
-      cnname: '', 
+      cnname: '',
       options: [
         {
           value: 'zh',
