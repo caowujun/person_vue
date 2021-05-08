@@ -78,10 +78,7 @@ export default {
         {
           validator: validateMoney,
           trigger: 'blur',
-          message:this.$t('rule.spendnumrule')
-          // requvalidateMoneyired: true,
-          // message: this.$t('rule.spendnumrule'),
-          // trigger: 'blur'
+          message: this.$t('rule.spendnumrule')
         }],
         moneyclassification: [{
           required: true,
@@ -126,10 +123,8 @@ export default {
         }
       })
         .then((successResponse) => {
-          debugger
           if (successResponse.data.code === 0) {
             this.moneyclassifications = successResponse.data.data
-            debugger
           }
         })
         .catch((error) => {

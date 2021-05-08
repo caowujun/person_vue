@@ -23,8 +23,7 @@ export default {
   data () {
     return {
       activeIndex: '',
-      cnname: '',
-      // webtitle: '',
+      cnname: '', 
       options: [
         {
           value: 'zh',

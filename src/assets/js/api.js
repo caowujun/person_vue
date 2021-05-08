@@ -3,13 +3,13 @@ const apilist = {
   login: '/api/sysuser/login.do', // 登录
   // 菜单
   sidemenu: '/api/sysuser/getUserMenus.do', // dashboard左边的菜单
-  menulist: '/api/sysmenu/list.do', // 编辑时，获取根目录的所有菜单
-  menupage: '/api/sysmenu/selectAll.do', // page列表
+  menulist: '/api/menu/list.do', // 编辑时，获取根目录的所有菜单
+  menupage: '/api/menu/selectAll.do', // page列表
   // updatemenustatus: "/api/sysmenu/updateStatus.do", //是否禁用
-  loadmenubyid: '/api/sysmenu/selectOne.do', // 编辑用
-  insertmenu: '/api/sysmenu/insert.do', // 新增或者更新
-  updatemenu: '/api/sysmenu/update.do', // 新增或者更新
-  menutreelist: '/api/sysmenu/treeList.do', // assignmenu时的tree跟数据
+  loadmenubyid: '/api/menu/selectOne.do', // 编辑用
+  insertmenu: '/api/menu/insert.do', // 新增或者更新
+  updatemenu: '/api/menu/update.do', // 新增或者更新
+  menutreelist: '/api/menu/treeList.do', // assignmenu时的tree跟数据
   // 用户
   userpage: '/api/sysuser/selectAll.do', // page列表，因为没有上下级关系，所以不会和menu一样重写了page方法
   usertreelist: '/api/sysuser/treeList.do', // assignuser时的tree跟数据
