@@ -27,9 +27,11 @@ export default {
     customconfiglist: 'サイト設定',
     menulist: 'メニューリスト',
     rolelist: '役割のリスト',
-    userlist: '一目でわかるユーザー'
+    userlist: '一目でわかるユーザー',
+    albumlist: 'アルバム'
   },
   form: {
+    back: '戻る',
     add: '追加',
     edit: '編集',
     reset: 'リセット',
@@ -40,8 +42,9 @@ export default {
     cancel: 'キャンセル',
     dateplaceholder: '日付を選択',
     areaplaceholder: 'コンテンツを入力してください',
-    Enable: '启用',
-    Disable: '禁用'
+    Enable: '有効にする',
+    Disable: '禁用',
+    importfile: '無効化'
   },
   tip: {
     deleteconfirm: 'データは削除されます、よろしいですか？',
@@ -60,7 +63,24 @@ export default {
     type: 'の種類',
     note: '備考',
     date: '日付',
-    moneyclassification: '消费クラス型'
+    consumptiontype: '消费クラス型'
+  },
+  sport: {
+    weight: '重量',
+    sex: 'スポーツ',
+    note: '備考',
+    date: '日付'
+  },
+  album: {
+    picname: 'ファイル名',
+    picpath: 'ファイルパス',
+    picsize: 'ファイル サイズ',
+    isfavorite: '評価'
+  },
+  gasoline: {
+    spendmoney: '消費量',
+    mileage: 'キロメートル',
+    Kilometer: 'ボリューム'
   },
   rule: {
     daterule: '日付を選択してください',

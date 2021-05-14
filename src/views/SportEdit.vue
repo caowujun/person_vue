@@ -4,24 +4,22 @@
       <el-page-header @back="goBack" :content="pagetitle">
       </el-page-header>
     </div>
-    <el-form ref="form" :model="form" label-width="180px" :rules="rules" hide-required-asterisk status-icon size="small">
-
-      <el-form-item label="体重" prop="weight">
+    <el-form ref="form" :model="form" label-width="180px" :rules="rules"
+    hide-required-asterisk status-icon >
+      <el-form-item :label="$t('sport.weight')" prop="weight">
         <el-input v-model="form.weight" class="input380"  ></el-input>
       </el-form-item>
-      <el-form-item label="运动" prop="sex">
+      <el-form-item :label="$t('sport.sex')" prop="sex">
         <el-input v-model="form.sex" class="input380"></el-input>
       </el-form-item>
-      <el-form-item label="备份" prop="note">
-        <el-input v-model="form.note" class="input380"></el-input>
+      <el-form-item :label="$t('sport.date')" prop="recorddate">
+        <el-date-picker v-model="form.recorddate" type="date" class="input380" :placeholder="$t('form.dateplaceholder')"
+          format="yyyy-MM-dd" value-format="yyyy-MM-dd"   >
+        </el-date-picker>
       </el-form-item>
-      <el-form-item label="日期" prop="recorddate">
-        <el-input v-model="form.recorddate" class="input380"></el-input>
-      </el-form-item>
-
       <el-form-item>
-        <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check">保存</el-button>
-        <el-button @click="goBack" plain icon="el-icon-circle-close">取消</el-button>
+        <el-button type="primary" size="small" @click.prevent="onSubmit" plain icon="el-icon-circle-check">{{$t('form.save')}}</el-button>
+        <el-button @click="goBack" size="small" plain icon="el-icon-circle-close">{{$t('form.cancel')}}</el-button>
       </el-form-item>
     </el-form>
   </el-card>
@@ -40,14 +38,13 @@ export default {
         id: '',
         weight: '',
         sex: '',
-        note: '',
         recorddate: ''
       },
-      userid: '',
+      id: '',
       rules: {
         recorddate: [{
           required: true,
-          message: '日期不能为空',
+            message: this.$t('rule.daterule'),
           trigger: 'blur'
         }, {
           validator: validateDate,
@@ -58,28 +55,26 @@ export default {
   },
   computed: {
     pagetitle: function () {
-      return this.userid === undefined ? '新增' : '编辑'
+        return ''//this.id === undefined ? this.$t('form.add') : this.$t('form.edit');
     }
   },
   methods: {
     goBack () {
       this.$router.replace({
-        path: '/userlist'
+        path: '/sportlist'
       })
-      console.log('go back')
     },
     loadData () {
-      this.$http.get(this.$apiList.loaduserbyid, {
+      this.$http.get(this.$apiList.loadsportbyid, {
         params: {
-          id: this.userid
+          id: this.id
         }
       })
         .then((successResponse) => {
-          console.log(successResponse)
           if (successResponse.data.code === 0) {
-            successResponse.data.data.status = successResponse.data.data.status !== 0
-
+            debugger
             this.form = successResponse.data.data
+            // this.form.recorddate=new Date(this.form.recorddate).Format("yyyy-MM-dd")
           }
         })
         .catch((error) => {
@@ -89,14 +84,12 @@ export default {
     onSubmit () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          this.$data.form.status = this.$data.form.status === true ? 1 : 0
-
-          this.$http.post(this.$apiList.saveuser, this.form)
+          this.$http.post(this.$apiList.savesport, this.form)
             .then(successResponse => {
-              console.log(successResponse)
               if (successResponse.data.code === 0) {
                 this.$notify.success()
-                this.userid = successResponse.data.data
+                debugger
+                this.goBack()
               } else {
                 this.$notify.warning()
               }
@@ -113,15 +106,18 @@ export default {
     }
   },
   mounted () {
-    this.userid = this.$route.query.id
+    this.id = this.$route.query.id
     if (this.$route.query.id !== undefined) {
       this.loadData()
+    }
+    else{
+      this.form.recorddate=new Date().Format("yyyy-MM-dd")
     }
   }
 }
 </script>
 <style scoped="scoped">
-  .input {
+  .input380 {
     width: 380px;
   }
 </style>

@@ -47,6 +47,7 @@ const apilist = {
   loadenumconfigByKey: '/api/enumtypes/findByKey.do', // 根据key获取自定义的值
   insertenumconfig: '/api/enumtypes/insert.do', // 新增或者更新
   updateenumconfig: '/api/enumtypes/update.do' // 新增或者更新
+
 }
 
 export default apilist

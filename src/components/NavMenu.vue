@@ -24,6 +24,7 @@ export default {
     return {
       activeIndex: '',
       cnname: '',
+      // webtitle: '',
       options: [
         {
           value: 'zh',
@@ -62,7 +63,7 @@ export default {
     loginout () {
       this.$store.commit('logout')
       this.$router.replace({
-        path: '/login'
+        path: '/weblogin'
       })
     },
     changei18 (lang) {

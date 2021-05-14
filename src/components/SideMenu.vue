@@ -57,6 +57,7 @@ export default {
     },
     getMenuLang () {
       return function (value) {
+         
         return this.$t('sidemenu.' + value)
       }
     }
@@ -68,6 +69,7 @@ export default {
     getCurrentMenu () {
       // 获取当前页面 菜单刷新后能自动选中
       const currentPage = window.location.href.split('#')[1]
+	   
       this.activedMenu = currentPage
     },
     handleClose (key, keyPath) {

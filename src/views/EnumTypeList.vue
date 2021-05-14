@@ -3,7 +3,7 @@
     <div slot="header" class="clearfix el-card__header1">
       <span>
         <i class="el-icon-share"></i>
-          {{$t('sidemenu.enumtypelist')}}</span>
+        枚举配置</span>
     </div>
     <el-form :inline="true" :model="formInline" style="text-align: left;" ref="form" size="small">
       <el-form-item prop="enummc">

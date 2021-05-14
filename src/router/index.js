@@ -41,15 +41,15 @@ const routes = [{
       }
     }, {
       path: '/gasolinelist',
-      name: 'SportList',
-      component: () => import(/* webpackChunkName: "about" */ '../views/SportList.vue'),
+      name: 'GasolineList',
+      component: () => import(/* webpackChunkName: "about" */ '../views/GasolineList.vue'),
       meta: {
         requireAuth: true
       }
     }, {
-      path: '/sportedit',
-      name: 'SportEdit',
-      component: () => import(/* webpackChunkName: "about" */ '../views/SportEdit.vue'),
+      path: '/gasolineedit',
+      name: 'GasolineEdit',
+      component: () => import(/* webpackChunkName: "about" */ '../views/GasolineEdit.vue'),
       meta: {
         requireAuth: true
       }
@@ -68,6 +68,20 @@ const routes = [{
         requireAuth: true
       }
     }, {
+      path: '/albumlist',
+      name: 'AlbumList',
+      component: () => import(/* webpackChunkName: "about" */ '../views/AlbumList.vue'),
+      meta: {
+        requireAuth: true
+      }
+    }, {
+      path: '/albumedit',
+      name: 'AlbumEdit',
+      component: () => import(/* webpackChunkName: "about" */ '../views/AlbumEdit.vue'),
+      meta: {
+        requireAuth: true
+      }
+    },{
       path: '/userlist',
       name: 'UserList',
       component: () => import(/* webpackChunkName: "about" */ '../views/UserList.vue'),
@@ -130,7 +144,15 @@ const routes = [{
       meta: {
         requireAuth: true
       }
+    }, {
+      path: '/enumtypelist',
+      name: 'EnumtypeList',
+      component: () => import(/* webpackChunkName: "about" */ '../views/EnumTypeList.vue'),
+      meta: {
+        requireAuth: true
+      }
     },
+
     {
       path: '/about',
       name: 'About',

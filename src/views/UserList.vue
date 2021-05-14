@@ -68,7 +68,7 @@ export default {
       },
       current: 1,
       pagesize: 10,
-      total: 25,
+      total: 0,
       loading: true
     }
   },

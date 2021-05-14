@@ -38,9 +38,11 @@ export default {
     customconfiglist: '网站设置',
     menulist: '菜单一览',
     rolelist: '角色一览',
-    userlist: '用户一览'
+    userlist: '用户一览',
+    albumlist: '相册一览'
   },
   form: {
+    back: '返回',
     add: '新增',
     edit: '编辑',
     reset: '重置',
@@ -51,8 +53,7 @@ export default {
     cancel: '取消',
     dateplaceholder: '选择日期',
     areaplaceholder: '请输入内容',
-    recorddate: '记录日期'
-
+    importfile: '导入'
   },
   tip: {
     deleteconfirm: '数据将被删除, 是否确定？',
@@ -71,7 +72,24 @@ export default {
     type: '类型',
     note: '备注',
     date: '日期',
-    moneyclassification: '消费类型'
+    consumptiontype: '消费类型'
+  },
+  sport: {
+    weight: '体重',
+    sex: '运动',
+    note: '备注',
+    date: '日期'
+  },
+  album: {
+    picname: '文件名',
+    picpath: '文件路径',
+    picsize: '文件大小',
+    isfavorite: '评分'
+  },
+  gasoline: {
+    spendmoney: '消费金额',
+    mileage: '公里数',
+    Kilometer: '容积'
   },
   rule: {
     daterule: '请选择日期',

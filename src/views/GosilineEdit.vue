@@ -4,8 +4,7 @@
       <el-page-header @back="goBack" :content="pagetitle">
       </el-page-header>
     </div>
-    <el-form ref="form" :model="form" label-width="180px" :rules="rules"
-    hide-required-asterisk status-icon size="small">
+    <el-form ref="form" :model="form" label-width="180px" :rules="rules" hide-required-asterisk status-icon size="small">
       <el-form-item v-if="isnew" label="父节点" prop="parentid">
         <el-select v-model="form.parentid" placeholder="请选择父节点" class="input380">
           <el-option label="root" value="root"></el-option>
@@ -35,9 +34,6 @@
 
 <script>
 // import api from "@/assets/js/api.js"
-import {
-  validateDate
-} from '@/assets/js/rules.js'
 
 export default {
   // name: 'MenuEdit',

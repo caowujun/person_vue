@@ -40,9 +40,12 @@ export default {
     customconfiglist: 'Website Settings',
     menulist: 'Menu list',
     rolelist: 'Role list',
-    userlist: 'User list'
+    userlist: 'User list',
+    albumlist: 'Album list'
+
   },
   form: {
+    back: 'Back',
     add: 'Add',
     edit: 'Edit',
     reset: 'Reset',
@@ -52,7 +55,8 @@ export default {
     search: 'Serch',
     cancel: 'Cancel',
     dateplaceholder: 'Select Date',
-    areaplaceholder: 'Please enter content'
+    areaplaceholder: 'Please enter content',
+    importfile: 'import'
   },
   tip: {
     deleteconfirm: 'The data will be deleted, are you sure?',
@@ -71,7 +75,24 @@ export default {
     type: 'Type',
     note: 'Remarks',
     date: 'Date',
-    moneyclassification: 'Money Classification'
+    consumptiontype: 'Money Classification'
+  },
+  sport: {
+    weight: 'Weight',
+    sex: 'Sex',
+    note: 'Note',
+    date: 'Date'
+  },
+  album: {
+    picname: 'file name',
+    picpath: 'file path',
+    picsize: 'file size',
+    isfavorite: 'score'
+  },
+  gasoline: {
+    spendmoney: 'Spend Money',
+    mileage: 'Mileage',
+    Kilometer: 'Kilometer'
   },
   rule: {
     daterule: 'Please select a date',

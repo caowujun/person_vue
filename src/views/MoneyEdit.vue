@@ -4,10 +4,10 @@
       <el-page-header @back="goBack" :content="pagetitle">
       </el-page-header>
     </div>
-    <el-form ref="form" :model="form" label-width="180px" :rules="rules" hide-required-asterisk status-icon
-      size="small">
+    <el-form ref="form" :model="form" label-width="180px" :rules="rules"
+    hide-required-asterisk status-icon      >
 
-      <el-form-item :label="$t('money.date')" prop="recorddate">
+      <el-form-item :label="$t('form.recorddate')" prop="recorddate">
         <el-date-picker v-model="form.recorddate" type="date" class="input380" :placeholder="$t('form.dateplaceholder')"
           format="yyyy-MM-dd" value-format="yyyy-MM-dd">
         </el-date-picker>
@@ -29,9 +29,9 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item :label="$t('money.moneyclassification')" prop="moneyclassification">
-        <el-select v-model="form.moneyclassification" :placeholder="$t('money.moneyclassification')" class="input380">
-          <el-option v-for="item in moneyclassifications" :label="item.enumname" :value="item.enumvalue" :key="item.id">
+      <el-form-item :label="$t('money.consumptiontype')" prop="consumptiontype">
+        <el-select v-model="form.consumptiontype" :placeholder="$t('money.consumptiontype')" class="input380">
+          <el-option v-for="item in consumptiontypes" :label="item.enumname" :value="item.enumvalue" :key="item.id">
           </el-option>
         </el-select>
       </el-form-item>
@@ -63,7 +63,7 @@ export default {
         moneyclassification: ''
       },
       id: '',
-      moneyclassifications: [],
+      consumptiontypes: [],
       rules: {
         recorddate: [{
           required: true,
@@ -78,7 +78,10 @@ export default {
         {
           validator: validateMoney,
           trigger: 'blur',
-          message: this.$t('rule.spendnumrule')
+          message:this.$t('rule.spendnumrule')
+          // requvalidateMoneyired: true,
+          // message: this.$t('rule.spendnumrule'),
+          // trigger: 'blur'
         }],
         moneyclassification: [{
           required: true,
@@ -119,12 +122,14 @@ export default {
     loadenumconfig () {
       this.$http.get(this.$apiList.loadenumconfigByKey, {
         params: {
-          enumtype: 'MONEYCLASSIFICATION'
+          enumtype: 'consumptiontype'
         }
       })
         .then((successResponse) => {
+          debugger
           if (successResponse.data.code === 0) {
-            this.moneyclassifications = successResponse.data.data
+            this.consumptiontypes = successResponse.data.data
+            debugger
           }
         })
         .catch((error) => {
@@ -160,6 +165,8 @@ export default {
     this.loadenumconfig()
     if (this.$route.query.id !== undefined) {
       this.loadData()
+    }else{
+      this.form.recorddate=new Date().Format("yyyy-MM-dd")
     }
   }
 }
