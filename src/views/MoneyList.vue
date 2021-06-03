@@ -6,6 +6,16 @@
         {{$t('sidemenu.moneylist')}}
       </span>
     </div>
+
+	<el-form :inline="true" :model="formInline" style="text-align: left;" ref="form" size="small">
+
+	 <el-form-item>
+        <el-button type="warning" plain @click="onReset" size="small" icon="el-icon-refresh"> {{$t('form.refresh')}}
+        </el-button>
+        <el-button type="success" plain @click="onAdd" size="small" icon="el-icon-circle-plus-outline">
+          {{$t('form.add')}} </el-button>
+	 </el-form-item>
+	</el-form>
     <el-form :inline="true" :model="formInline" class="demo-form-inline" style="text-align: left;" ref="form"
       size="small">
       <el-form-item prop="note">
@@ -54,135 +64,137 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" current-page="1"
-      :page-sizes="pageArray" :page-size="pagesize" background layout="total, sizes, prev, pager, next, jumper"
-      :total="total" style="text-align: right;margin-top: 20px;">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="current"
+      :page-sizes="pageArray"
+      :page-size="pagesize"
+      background
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      style="text-align: right; margin-top: 20px"
+    >
     </el-pagination>
   </el-card>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        tableData: [],
-        formInline: {
-          note: '',
-          consumptiontype: ''
-        },
-        consumptiontypes: [],
-        pageArray: this.$customconfig.pageArray,
-        pagesize: this.$customconfig.pagesize,
-        total: this.$customconfig.total,
-        current: 0,
-        loading: true
-      }
+export default {
+  data () {
+    return {
+      tableData: [],
+      formInline: {
+        note: '',
+        consumptiontype: ''
+      },
+      consumptiontypes: [],
+      pageArray: this.$customconfig.pageArray,
+      pagesize: this.$customconfig.pagesize,
+      total: 0,
+      current: 1,
+      loading: true
+    }
+  },
+  mounted () {
+    this.loadList()
+  },
+  methods: {
+    loadList () {
+      this.$http.get(this.$apiList.moneypage, {
+        params: {
+          current: this.$data.current,
+          size: this.$data.pagesize,
+          note: this.$data.formInline.note,
+          consumptiontype: this.$data.formInline.consumptiontype
+        }
+      })
+        .then((successResponse) => {
+          if (successResponse.data.code === 0) {
+            this.tableData = successResponse.data.data.records
+            this.total = successResponse.data.data.total
+          }
+          this.loading = false
+        })
+        .catch(() => {
+          this.loading = false
+        })
     },
-    mounted() {
-      this.loadList()
-    },
-    methods: {
-      loadList() {
-        this.$http.get(this.$apiList.moneypage, {
-            params: {
-              current: this.$data.current,
-              size: this.$data.pagesize,
-              note: this.$data.formInline.note,
-              consumptiontype: this.$data.formInline.consumptiontype
-            }
-          })
-          .then((successResponse) => {
-            if (successResponse.data.code === 0) {
-              this.tableData = successResponse.data.data.records
-              this.total = successResponse.data.data.total
-            }
-            this.loading = false
-          })
-          .catch(() => {
-            this.loading = false
-          })
-      },
-      loadenumconfig() {
-        this.$http.get(this.$apiList.loadenumconfigByKey, {
-            params: {
-              enumname: 'consumptiontype'
-            }
-          })
-          .then((successResponse) => {
-            if (successResponse.data.code === 0) {
-              this.consumptiontype = successResponse.data.data
-            }
-          })
-          .catch((error) => {
-            console.log(error) // 异常
-          })
-      },
-      dateFormat(row, column, cellValue, index) {
-        return this.$local.dateFormaterLong(cellValue)
-      },
-      mcFormat(row, column, cellValue, index) {
-        let filter_consumption = this.consumptiontype.filter(f => f.enumvalue === cellValue);
-        if (filter_consumption && filter_consumption.size > 0) {
-          return filter_consumption[0].enumname;
-        } else
-          return ""
-      },
-      handleEdit(index, row) {
-        this.$router.replace({
-          name: 'MoneyEdit',
-          query: {
-            id: row.id
+    loadenumconfig () {
+      this.$http.get(this.$apiList.loadenumconfigByKey, {
+        params: {
+          enumname: 'consumptiontype'
+        }
+      })
+        .then((successResponse) => {
+          if (successResponse.data.code === 0) {
+            this.consumptiontype = successResponse.data.data
           }
         })
-      },
-      handleDelete(index, row) {
-        this.$confirm(this.$t('tip.deleteconfirm'), this.$t('tip.title'), {
-          confirmButtonText: this.$t('tip.confirm'),
-          cancelButtonText: this.$t('tip.cancel'),
-          type: 'warning'
-        }).then(() => {
-          this.$http.get(this.$apiList.deletemoney, {
-              params: {
-                id: row.id
-              }
-            })
-            .then(successResponse => {
-              if (successResponse.data.code === 0) {
-                this.loadList()
-                this.$notify.success()
-              } else {
-                this.$notify.warning()
-              }
-            })
-            .catch(failResponse => {
-              console.log(failResponse)
-              this.$notify.error()
-            })
-        }).catch(() => {})
-      },
-      handleSizeChange(val) {
-        this.$data.pagesize = val
-        this.loadList()
-      },
-      handleCurrentChange(val) {
-        this.$data.current = val
-        this.loadList()
-        this.loadenumconfig()
-      },
-      onSubmit() {
-        this.loadList()
-      },
-      onReset() {
-        this.$refs.form.resetFields()
-        this.loadList()
-      },
-      onAdd() {
-        this.$router.replace({
-          name: 'MoneyEdit'
+        .catch((error) => {
+          console.log(error) // 异常
         })
-      }
+    },
+    dateFormat (row, column, cellValue, index) {
+      return new Date(cellValue).Format('yyyy-MM-dd')
+    },
+    mcFormat (row, column, cellValue, index) {
+      const filterConsumption = this.consumptiontype.filter(f => f.enumvalue === cellValue)
+      if (filterConsumption && filterConsumption.size > 0) {
+        return filterConsumption[0].enumname
+      } else { return '' }
+    },
+    handleEdit (index, row) {
+      this.$router.replace({
+        name: 'MoneyEdit',
+        query: {
+          id: row.id
+        }
+      })
+    },
+    handleDelete (index, row) {
+      this.$local.confirm(() => {
+        this.$http
+          .post(this.$apiList.deletemoney, this.$qs.stringify({
+            id: row.id
+          }))
+          .then((successResponse) => {
+            if (successResponse.data.code === 0) {
+              this.loadList()
+              this.$notify.success()
+            } else {
+              this.$notify.warning()
+            }
+          })
+          .catch((failResponse) => {
+            console.log(failResponse)
+            this.$notify.error()
+          })
+      })
+    },
+    handleSizeChange (val) {
+      this.$data.pagesize = val
+      this.loadList()
+    },
+    handleCurrentChange (val) {
+      this.$data.current = val
+      this.loadList()
+      this.loadenumconfig()
+    },
+    onSubmit () {
+      this.loadList()
+    },
+    onReset () {
+      this.$refs.form.resetFields()
+      this.loadList()
+    },
+    onAdd () {
+      this.$router.replace({
+        name: 'MoneyEdit'
+      })
     }
   }
+}
 </script>
 
 <style scoped>

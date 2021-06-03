@@ -8,30 +8,29 @@
 </template>
 
 <script>
-  name: 'PageTool'
-  export default {
-    data() {
-      return {
-        pageArray: this.$customconfig.pageArray,
-        loading: true
-      }
+export default {
+  data () {
+    return {
+      pageArray: this.$customconfig.pageArray,
+      loading: true
+    }
+  },
+  props: {
+    total: Number,
+    current: Number,
+    pagesize: Number
+  },
+  method: {
+    handleSizeChange (val) {
+      // this.props.pagesize = val
+      this.$emit('sizechange', val)
     },
-   props: {
-      total: Number,
-      current: Number,
-      pagesize: Number
-    },
-    method: {
-      handleSizeChange(val) {
-        // this.props.pagesize = val
-        this.$emit('sizechange', val)
-      },
-      handleCurrentChange(val) {
-        // this.props.current = val
-         this.$emit('@pagechange', val)
-      },
+    handleCurrentChange (val) {
+      // this.props.current = val
+      this.$emit('@pagechange', val)
     }
   }
+}
 </script>
 
 <style>

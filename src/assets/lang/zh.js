@@ -1,14 +1,3 @@
-// import zhLocale from 'element-ui/lib/locale/lang/zh-CN' // 引入element语言包
-// const cn = {
-//   message: {
-//     aa: '你好',
-//     riqi: '日期',
-//     text: '好好学习，天天向上'
-//   },
-//   ...zhLocale
-// }
-
-// export default cn
 export default {
   weblogin: {
     title: '欢迎使用我的个人管理系统',
@@ -46,6 +35,7 @@ export default {
     add: '新增',
     edit: '编辑',
     reset: '重置',
+    refresh: '刷新',
     save: '保存',
     delete: '删除',
     view: '查看',
@@ -63,7 +53,9 @@ export default {
   },
   common: {
     loading: '拼命加载中',
-    operation: '操作'
+    operation: '操作',
+    enable: '启用',
+    disenable: '禁用'
   },
   money: {
     in: '收入',
@@ -88,13 +80,37 @@ export default {
   },
   gasoline: {
     spendmoney: '消费金额',
-    mileage: '公里数',
-    Kilometer: '容积'
+    volume: '容积',
+    kilometer: '公里数',
+    unitprice: '单价',
+    recorddate: '日期'
+  },
+  enumtype: {
+    enumname: '枚举名',
+    enumvalue: '枚举值',
+    note: '备注',
+    enumtype: '枚举类型',
+    status: '是否启用'
+  },
+  customconfig: {
+    configkey: '关键字',
+    configvalue: '关键字值',
+    note: '备注',
+    status: '是否启用'
+  },
+  menu: {
+    parentmenu: '父菜单',
+    selectparentmenu: '请选择父菜单',
+    menuname: '菜单名',
+    status: '是否启用',
+    actionurl: '链接',
+    icon: '图标'
   },
   rule: {
-    daterule: '请选择日期',
-    spendnumrule: '请正确填写金额',
-    moneyclassificationrule: '必填项不能为空'
+    required: '必填项',
+    needDate: '请选择日期',
+    needInteger: '请填写正整数',
+    needTwoDecimal: '请填写两位小数'
   },
   skin: {
     Blue: 'Blue',

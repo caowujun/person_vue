@@ -35,6 +35,7 @@ export default {
     add: '追加',
     edit: '編集',
     reset: 'リセット',
+    refresh: 'リフレッシュ',
     save: '保存する',
     delete: '削除',
     view: '見る',
@@ -42,9 +43,7 @@ export default {
     cancel: 'キャンセル',
     dateplaceholder: '日付を選択',
     areaplaceholder: 'コンテンツを入力してください',
-    Enable: '有効にする',
-    Disable: '禁用',
-    importfile: '無効化'
+    importfile: 'インポート'
   },
   tip: {
     deleteconfirm: 'データは削除されます、よろしいですか？',
@@ -54,7 +53,9 @@ export default {
   },
   common: {
     loading: '読み込み中',
-    operation: '操作'
+    operation: '操作',
+    enable: '有効にする',
+    disenable: '無効にする'
   },
   money: {
     in: '所得',
@@ -79,13 +80,37 @@ export default {
   },
   gasoline: {
     spendmoney: '消費量',
-    mileage: 'キロメートル',
-    Kilometer: 'ボリューム'
+    volume: 'ボリューム',
+    kilometer: 'キロメートル',
+    unitprice: '単価',
+    recorddate: '基準日'
+  },
+  enumtype: {
+    enumname: '列挙の名前',
+    enumvalue: '列挙の値',
+    note: '備考',
+    enumtype: '列挙型',
+    status: '有効にするかどうか'
+  },
+  customconfig: {
+    configkey: 'キーワード',
+    configvalue: 'キーワード値',
+    note: '備考',
+    status: '有効にするかどうか'
+  },
+  menu: {
+    parentmenu: '親メニュー',
+    selectparentmenu: '親メニューを選択してください',
+    menuname: 'メニュー名',
+    status: '有効にするかどうか',
+    actionurl: 'リンク',
+    icon: 'アイコン'
   },
   rule: {
-    daterule: '日付を選択してください',
-    spendnumrule: '金額を正しく記入してください',
-    moneyclassificationrule: '必たら项不可是空'
+    required: '必須',
+    needDate: '日付を選択してください',
+    needInteger: '正の整数を入力してください',
+    needtwodecimal: '小数点以下第2位までご記入ください'
   },
   skin: {
     Blue: 'Blue',

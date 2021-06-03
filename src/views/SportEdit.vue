@@ -18,8 +18,11 @@
         </el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" size="small" @click.prevent="onSubmit" plain icon="el-icon-circle-check">{{$t('form.save')}}</el-button>
-        <el-button @click="goBack" size="small" plain icon="el-icon-circle-close">{{$t('form.cancel')}}</el-button>
+      <el-form-item>
+        <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check" size="small"> {{$t('form.save')}}
+        </el-button>
+        <el-button @click="goBack" plain icon="el-icon-circle-close" size="small"> {{$t('form.cancel')}}</el-button>
+      </el-form-item>
       </el-form-item>
     </el-form>
   </el-card>
@@ -44,7 +47,7 @@ export default {
       rules: {
         recorddate: [{
           required: true,
-            message: this.$t('rule.daterule'),
+          message: this.$t('rule.daterule'),
           trigger: 'blur'
         }, {
           validator: validateDate,
@@ -55,7 +58,7 @@ export default {
   },
   computed: {
     pagetitle: function () {
-        return ''//this.id === undefined ? this.$t('form.add') : this.$t('form.edit');
+      return ''// this.id === undefined ? this.$t('form.add') : this.$t('form.edit');
     }
   },
   methods: {
@@ -72,7 +75,6 @@ export default {
       })
         .then((successResponse) => {
           if (successResponse.data.code === 0) {
-            debugger
             this.form = successResponse.data.data
             // this.form.recorddate=new Date(this.form.recorddate).Format("yyyy-MM-dd")
           }
@@ -88,7 +90,6 @@ export default {
             .then(successResponse => {
               if (successResponse.data.code === 0) {
                 this.$notify.success()
-                debugger
                 this.goBack()
               } else {
                 this.$notify.warning()
@@ -109,9 +110,8 @@ export default {
     this.id = this.$route.query.id
     if (this.$route.query.id !== undefined) {
       this.loadData()
-    }
-    else{
-      this.form.recorddate=new Date().Format("yyyy-MM-dd")
+    } else {
+      this.form.recorddate = new Date().Format('yyyy-MM-dd')
     }
   }
 }

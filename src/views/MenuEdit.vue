@@ -6,39 +6,37 @@
     </div>
     <el-form ref="form" :model="form" label-width="180px" :rules="rules"
     hide-required-asterisk status-icon size="small">
-      <el-form-item v-if="isnew" label="父节点" prop="parentid">
-        <el-select v-model="form.parentid" placeholder="请选择父节点" class="input380">
+      <el-form-item v-if="isnew" :label="$t('menu.parentmenu')" prop="parentid">
+        <el-select v-model="form.parentid" :placeholder="$t('menu.selectparentmenu')" class="input380">
           <el-option label="root" value="root"></el-option>
           <el-option v-for="item in parentlist" :label="item.title" :value="item.id" :key="item.id"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="名称" prop="title">
+      <el-form-item :label="$t('menu.parentmenu')" prop="title">
         <el-input v-model="form.title" class="input380"></el-input>
       </el-form-item>
-      <el-form-item label="是否启用">
+      <el-form-item :label="$t('menu.status')">
         <el-switch v-model="form.status"></el-switch>
       </el-form-item>
-      <el-form-item label="链接地址">
+      <el-form-item :label="$t('menu.actionurl')">
         <el-input v-model="form.actionurl" class="input380"></el-input>
       </el-form-item>
-      <el-form-item label="图标">
+      <el-form-item :label="$t('menu.icon')">
         <el-input v-model="form.icon" class="input380"></el-input>
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check">保存</el-button>
-        <el-button @click="goBack" plain icon="el-icon-circle-close">取消</el-button>
+     <el-form-item>
+       <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check" size="small"> {{$t('form.save')}}
+       </el-button>
+       <el-button @click="goBack" plain icon="el-icon-circle-close" size="small"> {{$t('form.cancel')}}</el-button>
+     </el-form-item>
       </el-form-item>
     </el-form>
   </el-card>
 </template>
 
 <script>
-// import api from "@/assets/js/api.js"
-import {
-  validateDate
-} from '@/assets/js/rules.js'
-
 export default {
   // name: 'MenuEdit',
   data () {
@@ -56,7 +54,7 @@ export default {
       rules: {
         title: [{
           required: true,
-          message: '名称不能为空',
+           message: this.$t('rule.required'),
           trigger: 'blur'
         }]
       }
@@ -67,7 +65,9 @@ export default {
       return this.menuid === undefined
     },
     pagetitle: function () {
-      return this.menuid === undefined ? '新增' : '编辑'
+      // return this.menuid === undefined ? '新增' : '编辑'
+      return this.$t('sidemenu.menulist') + '/' + this.id === undefined ? this.$t('form.add') : this.$t(
+        'form.edit')
     }
   },
   methods: {
@@ -120,7 +120,8 @@ export default {
               console.log(successResponse)
               if (successResponse.data.code === 0) {
                 this.$notify.success()
-                this.menuid = successResponse.data.data
+                 this.goBack()
+                // this.menuid = successResponse.data.data
               } else {
                 this.$notify.warning()
               }

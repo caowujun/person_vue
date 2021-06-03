@@ -124,24 +124,7 @@ export function isInteger (rule, value, callback) {
     }
   }, 0)
 }
-export function isIntegerNotMust (rule, value, callback) {
-  if (!value) {
-    callback()
-  }
-  setTimeout(() => {
-    if (!Number(value)) {
-      callback(new Error('请输入正整数'))
-    } else {
-      const re = /^[0-9]*[1-9][0-9]*$/
-      const rsCheck = re.test(value)
-      if (!rsCheck) {
-        callback(new Error('请输入正整数'))
-      } else {
-        callback()
-      }
-    }
-  }, 1000)
-}
+
 export function isDecimal (rule, value, callback) {
   if (!value) {
     return callback(new Error('输入不可以为空'))
@@ -200,18 +183,21 @@ export const validateDate = (rule, value, callback) => {
     callback()
   }
 }
-
-export const validateMoney = (rule, value, callback, message) => {
-  // if (!value) {
-  //   return callback(new Error('请输入金额'))
-  // }
+// 2位小数
+export const isTwoDecimal = (rule, value, callback, message) => {
   if (!/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/.test(value)) {
     callback(new Error(message))
   } else {
     callback()
   }
 }
-
+export function isIntegerNotMust (rule, value, callback, message) {
+  if (!/^[0-9]*[1-9][0-9]*$/.test(value)) {
+    callback(new Error(message))
+  } else {
+    callback()
+  }
+}
 export const validateCode = (rule, value, callback) => {
   if (!value) {
     return callback(new Error('请输入账号'))

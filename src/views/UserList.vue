@@ -14,12 +14,15 @@
         <el-input v-model="formInline.idcard" placeholder="身份证号" class="input150"></el-input>
       </el-form-item> -->
       <el-form-item>
-        <el-button type="primary" plain @click="onSubmit" size="small" icon="el-icon-search">查询</el-button>
-        <el-button type="warning" plain @click="onReset" size="small" icon="el-icon-refresh">重置</el-button>
-        <el-button type="success" plain @click="onAdd" size="small" icon="el-icon-circle-plus-outline">新增</el-button>
+        <el-button type="primary" plain @click="onSubmit" size="small" icon="el-icon-search"> {{$t('form.search')}}
+        </el-button>
+        <el-button type="warning" plain @click="onReset" size="small" icon="el-icon-refresh"> {{$t('form.refresh')}}
+        </el-button>
+        <el-button type="success" plain @click="onAdd" size="small" icon="el-icon-circle-plus-outline">
+          {{$t('form.add')}} </el-button>
       </el-form-item>
     </el-form>
-    <el-table :data="tableData" style="width: 100%" border stripe size="small" v-loading="loading" element-loading-text="拼命加载中"
+    <el-table :data="tableData" style="width: 100%" border stripe size="small" v-loading="loading"  :element-loading-text="$t('common.loading')"
       element-loading-spinner="el-icon-loading">
 
       <el-table-column label="姓名" prop="cnname">
@@ -48,9 +51,17 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current"
-      :page-sizes="[10, 25, 50, 100]" :page-size="pagesize" background layout="total, sizes, prev, pager, next, jumper"
-      :total="total" style="text-align: right;margin-top: 20px;">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="current"
+      :page-sizes="pageArray"
+      :page-size="pagesize"
+      background
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      style="text-align: right; margin-top: 20px"
+    >
     </el-pagination>
   </el-card>
 </template>
@@ -64,11 +75,11 @@ export default {
       tableData: [],
       formInline: {
         cnname: ''
-        // idcard: ''
       },
-      current: 1,
-      pagesize: 10,
+      pageArray: this.$customconfig.pageArray,
+      pagesize: this.$customconfig.pagesize,
       total: 0,
+      current: 1,
       loading: true
     }
   },
@@ -85,9 +96,6 @@ export default {
       })
       console.log(index, row)
     },
-    // handleDelete(index, row) {
-    //   console.log(index, row);
-    // },
     handleSizeChange (val) {
       this.$data.pagesize = val
       this.loadUserList()

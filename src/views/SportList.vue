@@ -8,10 +8,12 @@
     </div>
     <el-form :inline="true" class="demo-form-inline" style="text-align: left;" ref="form" size="small">
       <el-form-item>
-<!--        <el-button type="warning" plain @click="onReset" size="small" icon="el-icon-refresh"> {{$t('form.reset')}}
-        </el-button> -->
-        <el-button type="success" plain @click="onAdd" icon="el-icon-circle-plus-outline">{{$t('form.add')}}</el-button>
+        <el-button type="warning" plain @click="onReset" size="small" icon="el-icon-refresh"> {{$t('form.refresh')}}
+        </el-button>
+        <el-button type="success" plain @click="onAdd" size="small" icon="el-icon-circle-plus-outline">
+          {{$t('form.add')}} </el-button>
 
+        </el-button>
       </el-form-item>
     </el-form>
 
@@ -35,9 +37,17 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="current"
-      :page-sizes="pageArray" :page-size="pagesize" background layout="total, sizes, prev, pager, next, jumper"
-      :total="total" style="text-align: right;margin-top: 20px;">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="current"
+      :page-sizes="pageArray"
+      :page-size="pagesize"
+      background
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      style="text-align: right; margin-top: 20px"
+    >
     </el-pagination>
 
   </el-card>

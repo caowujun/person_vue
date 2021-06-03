@@ -81,7 +81,7 @@ const routes = [{
       meta: {
         requireAuth: true
       }
-    },{
+    }, {
       path: '/userlist',
       name: 'UserList',
       component: () => import(/* webpackChunkName: "about" */ '../views/UserList.vue'),
@@ -145,14 +145,27 @@ const routes = [{
         requireAuth: true
       }
     }, {
+      path: '/customfonfigedit',
+      name: 'CustomConfigEdit',
+      component: () => import(/* webpackChunkName: "about" */ '../views/CustomConfigEdit.vue'),
+      meta: {
+        requireAuth: true
+      }
+    }, {
       path: '/enumtypelist',
-      name: 'EnumtypeList',
+      name: 'EnumTypeList',
       component: () => import(/* webpackChunkName: "about" */ '../views/EnumTypeList.vue'),
       meta: {
         requireAuth: true
       }
+    }, {
+      path: '/enumgtypeedit',
+      name: 'EnumTypeEdit',
+      component: () => import(/* webpackChunkName: "about" */ '../views/EnumTypeEdit.vue'),
+      meta: {
+        requireAuth: true
+      }
     },
-
     {
       path: '/about',
       name: 'About',

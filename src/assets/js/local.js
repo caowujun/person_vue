@@ -3,8 +3,7 @@ import {
   MessageBox
 } from 'element-ui'
 
-
-var ismobile = function() {
+var ismobile = function () {
   const flag = navigator.userAgent.match(
     /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
   )
@@ -12,7 +11,7 @@ var ismobile = function() {
   return flag ? 1 : 0
 }
 
-var base64ToBlob = function(base64Data) {
+var base64ToBlob = function (base64Data) {
   let byteString
   // atob() 方法用于解码使用 base-64 编码的字符串。base-64 编码使用方法是 btoa() 。
   if (base64Data.split(',')[0].indexOf('base64') >= 0) {
@@ -32,7 +31,7 @@ var base64ToBlob = function(base64Data) {
   return blob
 }
 
-var showChart = function(myChart, title, legend, charttype, x, y) {
+var showChart = function (myChart, title, legend, charttype, x, y) {
   // var defaults = {type: 'value'};
   var option = {
     title: {
@@ -64,36 +63,32 @@ var showChart = function(myChart, title, legend, charttype, x, y) {
       barWidth: 30,
       markPoint: {
         data: [{
-            type: 'max',
-            name: '最大值'
-          },
-          {
-            type: 'min',
-            name: '最小值'
-          }
+          type: 'max',
+          name: '最大值'
+        },
+        {
+          type: 'min',
+          name: '最小值'
+        }
         ]
       }
     }]
   }
   // 为echarts对象加载数据
   myChart.setOption(option)
-  window.addEventListener('resize', function() {
+  window.addEventListener('resize', function () {
     myChart.resize()
   })
 }
 
-
-
-var confirm = function(callback) {
+var confirm = function (callback) {
   MessageBox.confirm(i18n.t('tip.deleteconfirm'), i18n.t('tip.title'), {
     confirmButtonText: i18n.t('tip.confirm'),
     cancelButtonText: i18n.t('tip.cancel'),
     type: 'warning'
   }).then(() => {
-    debugger
     callback()
   }).catch(() => {
-    debugger
   })
 }
 export default {

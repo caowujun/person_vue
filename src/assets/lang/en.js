@@ -1,16 +1,3 @@
-
-// import enLocale from 'element-ui/lib/locale/lang/en' // 引入element语言包
-// const en = {
-//   message: {
-//     aa: 'hello',
-//     riqi: 'date',
-//     text: 'Good good study, Day day up'
-//   },
-//   ...enLocale
-// }
-
-// export default en
-
 export default {
   weblogin: {
     title: 'Welcome to use my personal management system',
@@ -23,40 +10,40 @@ export default {
   navartop: {
     title: 'Welcome to use my personal management system',
     hello: 'Hello，',
-    personinfo: 'Person Info',
-    pwdmodify: 'Modify Password',
-    logout: 'Log Out',
+    personinfo: 'Person info',
+    pwdmodify: 'Modify password',
+    logout: 'Log out',
     changei18: 'Switch languages '
   },
   sidemenu: {
-    home: 'My HomePage',
-    persontools: 'Person Tools',
-    systemconfig: 'System Config',
-    rightconfig: 'Right Config',
-    gasolinelist: 'Gasoline Record',
+    home: 'My homePage',
+    persontools: 'Person tools',
+    systemconfig: 'System config',
+    rightconfig: 'Right config',
+    gasolinelist: 'Gasoline record',
     moneylist: 'Expense record',
     sportlist: 'Sports statistics',
     enumtypelist: 'Enumerate settings',
-    customconfiglist: 'Website Settings',
+    customconfiglist: 'Website settings',
     menulist: 'Menu list',
     rolelist: 'Role list',
     userlist: 'User list',
     albumlist: 'Album list'
-
   },
   form: {
     back: 'Back',
     add: 'Add',
     edit: 'Edit',
     reset: 'Reset',
+    refresh: 'Refresh',
     save: 'Save',
     delete: 'Delete',
     view: 'View',
     search: 'Serch',
     cancel: 'Cancel',
-    dateplaceholder: 'Select Date',
+    dateplaceholder: 'Select date',
     areaplaceholder: 'Please enter content',
-    importfile: 'import'
+    importfile: 'Import'
   },
   tip: {
     deleteconfirm: 'The data will be deleted, are you sure?',
@@ -66,16 +53,18 @@ export default {
   },
   common: {
     loading: 'Loading',
-    operation: 'operation'
+    operation: 'Operation',
+    enable: 'Enable',
+    disenable: 'Disenable'
   },
   money: {
     in: 'Income',
     out: 'Spending',
     spendnum: 'Amount',
     type: 'Type',
-    note: 'Remarks',
+    note: 'Note',
     date: 'Date',
-    consumptiontype: 'Money Classification'
+    consumptiontype: 'Money classification'
   },
   sport: {
     weight: 'Weight',
@@ -84,20 +73,44 @@ export default {
     date: 'Date'
   },
   album: {
-    picname: 'file name',
-    picpath: 'file path',
-    picsize: 'file size',
-    isfavorite: 'score'
+    picname: 'File name',
+    picpath: 'File path',
+    picsize: 'File size',
+    isfavorite: 'Score'
   },
   gasoline: {
     spendmoney: 'Spend Money',
-    mileage: 'Mileage',
-    Kilometer: 'Kilometer'
+    volume: 'Volume',
+    kilometer: 'Kilometer',
+    unitprice: 'Unit price',
+    recorddate: 'Date'
+  },
+  enumtype: {
+    enumname: 'Enum name',
+    enumvalue: 'Enum value',
+    note: 'Note',
+    enumtype: 'Enum type',
+    status: 'Status'
+  },
+  customconfig: {
+    configkey: 'Configkey',
+    configvalue: 'Configvalue',
+    note: 'Note',
+    status: 'Status'
+  },
+  menu: {
+    parentmenu: 'Parent menu',
+    selectparentmenu: 'Please select parentmenu',
+    menuname: 'Menu name',
+    status: 'Status',
+    actionurl: 'Link',
+    icon: 'Icon'
   },
   rule: {
-    daterule: 'Please select a date',
-    spendnumrule: 'Please fill in the amount correctly',
-    moneyclassificationrule: 'Required fields cannot be empty'
+    required: 'Required',
+    needDate: 'Please select a date',
+    needInteger: 'Please fill in a positive integer',
+    needtwodecimal: 'Please fill in two decimal places'
   },
   skin: {
     Blue: 'Blue',

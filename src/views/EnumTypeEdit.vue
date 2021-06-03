@@ -5,23 +5,26 @@
       </el-page-header>
     </div>
     <el-form ref="form" :model="form" label-width="180px" :rules="rules" hide-required-asterisk status-icon size="small">
-      <el-form-item :label="$t('customconfig.configkey')" prop="configkey">
-        <el-input v-model.trim="form.configkey" class="input380"></el-input>
+      <el-form-item :label="$t('enumtype.enumname')" prop="enumname">
+        <el-input v-model.trim="form.enumname" class="input380"></el-input>
       </el-form-item>
-      <el-form-item :label="$t('customconfig.configvalue')" prop="configvalue">
-        <el-input v-model.trim="form.configvalue" class="input380"></el-input>
+      <el-form-item :label="$t('enumtype.enumvalue')" prop="enumvalue">
+        <el-input v-model.trim="form.enumvalue" class="input380"></el-input>
       </el-form-item>
-      <el-form-item :label="$t('customconfig.note')" prop="note">
+            <el-form-item :label="$t('enumtype.enumtype')" prop="enumtype">
+        <el-input v-model.trim="form.enumtype" class="input380"></el-input>
+      </el-form-item>
+      <el-form-item :label="$t('enumtype.note')" prop="note">
         <el-input v-model.trim="form.note" class="input380"></el-input>
       </el-form-item>
-      <el-form-item :label="$t('customconfig.status')">
+      <el-form-item :label="$t('enumtype.status')">
         <el-switch v-model="form.status"></el-switch>
       </el-form-item>
-     <el-form-item>
-       <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check" size="small"> {{$t('form.save')}}
-       </el-button>
-       <el-button @click="goBack" plain icon="el-icon-circle-close" size="small"> {{$t('form.cancel')}}</el-button>
-     </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check" size="small"> {{$t('form.save')}}
+      </el-button>
+      <el-button @click="goBack" plain icon="el-icon-circle-close" size="small"> {{$t('form.cancel')}}</el-button>
+    </el-form-item>
     </el-form>
   </el-card>
 </template>
@@ -32,38 +35,35 @@ export default {
     return {
       form: {
         id: '',
-        configkey: '',
-        configvalue: '',
-        note: '',
+        enumname: '',
+        enumvalue: '',
+        description: '',
+        enumtype: '',
         isenable: true // 开关不支持数值类型
       },
       id: '',
       rules: {
-        configkey: [{
+        enumname: [{
           required: true,
-         message: this.$t('rule.required'),
+          message: this.$t('rule.required'),
           trigger: 'blur'
         }],
-        configvalue: [{
+        enumvalue: [{
           required: true,
-         message: this.$t('rule.required'),
+           message: this.$t('rule.required'),
           trigger: 'blur'
         }],
-        note: [{
+        enumtype: [{
           required: true,
-         message: this.$t('rule.required'),
+          message: this.$t('rule.required'),
           trigger: 'blur'
         }]
       }
     }
   },
   computed: {
-    isnew: function () {
-      return this.id === undefined
-    },
     pagetitle: function () {
-      // return this.id === undefined ? '新增' : '编辑'
-      return this.$t('sidemenu.configlist') + '/' + this.id === undefined ? this.$t('form.add') : this.$t(
+      return this.$t('sidemenu.enumtypelist') + '/' + this.id === undefined ? this.$t('form.add') : this.$t(
         'form.edit')
     }
   },

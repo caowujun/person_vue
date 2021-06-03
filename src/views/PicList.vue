@@ -44,9 +44,17 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" current-page="1"
-      :page-sizes="pageArray" :page-size="pagesize" background layout="total, sizes, prev, pager, next, jumper"
-      :total="total" style="text-align: right;margin-top: 20px;">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="current"
+      :page-sizes="pageArray"
+      :page-size="pagesize"
+      background
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      style="text-align: right; margin-top: 20px"
+    >
     </el-pagination>
   </el-card>
 </template>
@@ -61,8 +69,8 @@ export default {
       },
       pageArray: this.$customconfig.pageArray,
       pagesize: this.$customconfig.pagesize,
-      total: this.$customconfig.total,
-      current:0,
+      total: 0,
+      current: 1,
       loading: true
     }
   },
@@ -90,7 +98,7 @@ export default {
         })
     },
     dateFormat (row, column, cellValue, index) {
-      return this.$local.dateFormaterLong(cellValue)
+      return new Date(cellValue).Format('yyyy-MM-dd')
     },
     handleShow (index, row) {
       this.$router.replace({
@@ -101,17 +109,12 @@ export default {
       })
     },
     handleDelete (index, row) {
-      this.$confirm(this.$t('tip.deleteconfirm'), this.$t('tip.title'), {
-        confirmButtonText: this.$t('tip.confirm'),
-        cancelButtonText: this.$t('tip.cancel'),
-        type: 'warning'
-      }).then(() => {
-        this.$http.get(this.$apiList.deletealbum, {
-          params: {
+      this.$local.confirm(() => {
+        this.$http
+          .post(this.$apiList.deletemoney, this.$qs.stringify({
             id: row.id
-          }
-        })
-          .then(successResponse => {
+          }))
+          .then((successResponse) => {
             if (successResponse.data.code === 0) {
               this.loadList()
               this.$notify.success()
@@ -119,11 +122,11 @@ export default {
               this.$notify.warning()
             }
           })
-          .catch(failResponse => {
+          .catch((failResponse) => {
             console.log(failResponse)
             this.$notify.error()
           })
-      }).catch(() => {})
+      })
     },
     handleSizeChange (val) {
       this.$data.pagesize = val

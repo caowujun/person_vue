@@ -24,8 +24,11 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check">保存</el-button>
-        <el-button @click="goBack" plain icon="el-icon-circle-close">取消</el-button>
+     <el-form-item>
+       <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check" size="small"> {{$t('form.save')}}
+       </el-button>
+       <el-button @click="goBack" plain icon="el-icon-circle-close" size="small"> {{$t('form.cancel')}}</el-button>
+     </el-form-item>
       </el-form-item>
     </el-form>
   </el-card>

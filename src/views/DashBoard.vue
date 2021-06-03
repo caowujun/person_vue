@@ -2,19 +2,19 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="8">
-        <el-divider content-position="left">面积对比</el-divider>
+        <el-divider content-position="left">xx</el-divider>
         <el-card class="box-card1" id="chart1" ref="chart1">
 
         </el-card>
       </el-col>
       <el-col :span="8">
-        <el-divider content-position="left">图表2</el-divider>
+        <el-divider content-position="left">xx2</el-divider>
         <el-card class="box-card1" id="chart2" ref="chart2">
 
         </el-card>
       </el-col>
       <el-col :span="8">
-        <el-divider content-position="left">图表2</el-divider>
+        <el-divider content-position="left">xx2</el-divider>
         <el-card class="box-card1" id="chart2" ref="chart2">
 
         </el-card>
@@ -22,13 +22,13 @@
     </el-row>
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-divider content-position="left">面积对比</el-divider>
+        <el-divider content-position="left">xx</el-divider>
         <el-card class="box-card1" id="chart3" ref="chart3">
 
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-divider content-position="left">图表2</el-divider>
+        <el-divider content-position="left">xx2</el-divider>
         <el-card class="box-card1" id="chart4" ref="chart4">
 
         </el-card>
@@ -36,13 +36,13 @@
     </el-row>
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-divider content-position="left">面积对比</el-divider>
+        <el-divider content-position="left">xx</el-divider>
         <el-card class="box-card1" id="chart3" ref="chart3">
 
         </el-card>
       </el-col>
       <el-col :span="12">
-        <el-divider content-position="left">图表2</el-divider>
+        <el-divider content-position="left">xx2</el-divider>
         <el-card class="box-card1" id="chart4" ref="chart4">
 
         </el-card>
