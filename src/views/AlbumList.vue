@@ -49,94 +49,62 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        tableData: [],
-        formInline: {
-          picname: ''
-        },
-        pageArray: this.$customconfig.pageArray,
-        pagesize: this.$customconfig.pagesize,
-        total: 0,
-        current: 1,
-        loading: true
-      }
-    },
-    mounted() {
-      this.loadList()
-    },
-    methods: {
-      loadList() {
-        this.$http
-          .get(this.$apiList.albumpage, {
-            params: {
-              current: this.$data.current,
-              size: this.$data.pagesize,
-              picname: this.$data.formInline.picname,
-              parentid: 'root'
-            }
-          })
-          .then((successResponse) => {
-            if (successResponse.data.code === 0) {
-              this.tableData = successResponse.data.data.records
-              this.total = successResponse.data.data.total
-            }
-            this.loading = false
-          })
-          .catch(() => {
-            this.loading = false
-          })
+export default {
+  data () {
+    return {
+      tableData: [],
+      formInline: {
+        picname: ''
       },
-      dateFormat(row, column, cellValue, index) {
-        return new Date(cellValue).Format('yyyy-MM-dd')
-      },
-      handleShow(index, row) {
-        this.$router.replace({
-          name: 'PicList',
-          query: {
-            parentid: row.parentid
+      pageArray: this.$customconfig.pageArray,
+      pagesize: this.$customconfig.pagesize,
+      total: 0,
+      current: 1,
+      loading: true
+    }
+  },
+  mounted () {
+    this.loadList()
+  },
+  methods: {
+    loadList () {
+      this.$http
+        .get(this.$apiList.albumpage, {
+          params: {
+            current: this.$data.current,
+            size: this.$data.pagesize,
+            picname: this.$data.formInline.picname,
+            parentid: 'root'
           }
         })
-      },
-      handleDelete(index, row) {
-        this.$local.confirm(() => {
-          this.$http
-            .post(this.$apiList.deletealbum, this.$qs.stringify({
-              id: row.id
-            }))
-            .then((successResponse) => {
-              if (successResponse.data.code === 0) {
-                this.loadList()
-                this.$notify.success()
-              } else {
-                this.$notify.warning()
-              }
-            })
-            .catch((failResponse) => {
-              console.log(failResponse)
-              this.$notify.error()
-            })
+        .then((successResponse) => {
+          if (successResponse.data.code === 0) {
+            this.tableData = successResponse.data.data.records
+            this.total = successResponse.data.data.total
+          }
+          this.loading = false
         })
-      },
-      handleSizeChange(val) {
-        this.$data.pagesize = val
-        this.loadList()
-      },
-      handleCurrentChange(val) {
-        this.$data.current = val
-        this.loadList()
-      },
-      onSubmit() {
-        this.loadList()
-      },
-      onReset() {
-        this.$refs.form.resetFields()
-        this.loadList()
-      },
-      onAdd() {
+        .catch(() => {
+          this.loading = false
+        })
+    },
+    dateFormat (row, column, cellValue, index) {
+      return new Date(cellValue).Format('yyyy-MM-dd')
+    },
+    handleShow (index, row) {
+      this.$router.replace({
+        name: 'PicList',
+        query: {
+          parentid: row.parentid
+        }
+      })
+    },
+    handleDelete (index, row) {
+      this.$local.confirm(() => {
         this.$http
-          .post(this.$apiList.importfolder, this.$qs.stringify({}))
+          .post(this.$apiList.deletealbum, this.$qs.stringify({
+            id: row.id
+          }))
           .then((successResponse) => {
             if (successResponse.data.code === 0) {
               this.loadList()
@@ -149,9 +117,41 @@
             console.log(failResponse)
             this.$notify.error()
           })
-      }
+      })
+    },
+    handleSizeChange (val) {
+      this.$data.pagesize = val
+      this.loadList()
+    },
+    handleCurrentChange (val) {
+      this.$data.current = val
+      this.loadList()
+    },
+    onSubmit () {
+      this.loadList()
+    },
+    onReset () {
+      this.$refs.form.resetFields()
+      this.loadList()
+    },
+    onAdd () {
+      this.$http
+        .post(this.$apiList.importfolder, this.$qs.stringify({}))
+        .then((successResponse) => {
+          if (successResponse.data.code === 0) {
+            this.loadList()
+            this.$notify.success()
+          } else {
+            this.$notify.warning()
+          }
+        })
+        .catch((failResponse) => {
+          console.log(failResponse)
+          this.$notify.error()
+        })
     }
   }
+}
 </script>
 
 <style scoped>

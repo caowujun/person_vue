@@ -3,16 +3,12 @@
     <div slot="header" class="clearfix el-card__header1">
       <span>
         <i class="el-icon-share"></i>
-        用户列表</span>
+          {{$t('sidemenu.userlist')}}</span>
     </div>
     <el-form :inline="true" :model="formInline" class="demo-form-inline" style="text-align: left;" ref="form" size="small">
       <el-form-item prop="cnname">
-        <el-input v-model="formInline.cnname" placeholder="姓名"  class="input150"></el-input>
+        <el-input v-model="formInline.cnname" :placeholder="$t('user.cnname')"  class="input150"></el-input>
       </el-form-item>
-
-<!--      <el-form-item prop="idcard">
-        <el-input v-model="formInline.idcard" placeholder="身份证号" class="input150"></el-input>
-      </el-form-item> -->
       <el-form-item>
         <el-button type="primary" plain @click="onSubmit" size="small" icon="el-icon-search"> {{$t('form.search')}}
         </el-button>
@@ -25,31 +21,30 @@
     <el-table :data="tableData" style="width: 100%" border stripe size="small" v-loading="loading"  :element-loading-text="$t('common.loading')"
       element-loading-spinner="el-icon-loading">
 
-      <el-table-column label="姓名" prop="cnname">
+      <el-table-column :label="$t('user.cnname')" prop="cnname">
       </el-table-column>
-<!--      <el-table-column label="身份证号" prop="idcard">
-      </el-table-column> -->
-      <el-table-column label="手机号" prop="phonenum">
+      <el-table-column label="$t('user.phonenum')" prop="phonenum">
       </el-table-column>
-      <el-table-column label="登录名" prop="username">
+      <el-table-column label="$t('user.username')" prop="username">
       </el-table-column>
-      <el-table-column label="账号状态" prop="isenable">
+     <el-table-column :label="$t('customconfig.status')" prop="status">
         <template slot-scope="scope">
-          <span v-if="scope.row.status === 0" class="red">禁用</span>
-          <span v-if="scope.row.status === 1" class="green">启用</span>
+ <span v-if="scope.row.status === 0" class="red">{{$t('common.disenable')}}</span>
+         <span v-if="scope.row.status === 1" class="green">{{$t('common.enbale')}}</span>
           <!-- <span :class="scope.row.isenable === 0 ? 'red':'green'">{{scope.row.isenable==0?"禁用":"启用"}}</span> -->
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="300px">
-        <template slot-scope="scope">
-          <el-button size="mini" plain @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">编辑</el-button>
-          <!-- <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
-          <el-button size="mini" type="danger" plain v-if="scope.row.status==1" @click="changeStatus(scope.$index, scope.row)"
-            icon="el-icon-lock">禁用</el-button>
-          <el-button size="mini" type="primary" plain v-else @click="changeStatus(scope.$index, scope.row)" icon="el-icon-unlock">启用</el-button>
-          <el-button size="mini" @click="assign(scope.$index, scope.row)" icon="el-icon-edit">分配</el-button>
-        </template>
-      </el-table-column>
+    <el-table-column :label="$t('common.operation')" align="center" width="300px">
+      <template slot-scope="scope">
+        <el-button size="mini" plain @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">
+          {{$t('form.edit')}}</el-button>
+        <el-button size="mini" type="danger" plain v-if="scope.row.status==1"
+          @click="changeStatus(scope.$index, scope.row)" icon="el-icon-lock">{{$t('common.disenable')}}</el-button>
+        <el-button size="mini" type="primary" plain v-else @click="changeStatus(scope.$index, scope.row)"
+          icon="el-icon-unlock">{{$t('common.enbale')}}</el-button>
+             <el-button size="mini" plain @click="assign(scope.$index, scope.row)" icon="el-icon-edit">{{$t('form.assign')}}</el-button>
+      </template>
+    </el-table-column>
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
@@ -99,12 +94,10 @@ export default {
     handleSizeChange (val) {
       this.$data.pagesize = val
       this.loadUserList()
-      console.log(`每页 ${val} 条`)
     },
     handleCurrentChange (val) {
       this.$data.current = val
       this.loadUserList()
-      console.log(`当前页: ${val}`)
     },
     assign (index, row) {
       this.$router.replace({
@@ -121,8 +114,6 @@ export default {
           current: this.$data.current,
           size: this.$data.pagesize,
           cnname: this.$data.formInline.cnname
-          // ,
-          // idcard: this.$data.formInline.idcard
         }
       })
         .then((successResponse) => {

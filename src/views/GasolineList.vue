@@ -11,17 +11,14 @@
       <el-form-item>
         <el-button type="warning" plain @click="onReset" size="small" icon="el-icon-refresh"> {{$t('form.refresh')}}
         </el-button>
-        
         <el-button type="success" plain @click="onAdd" size="small" icon="el-icon-circle-plus-outline">
           {{$t('form.add')}}
         </el-button>
       </el-form-item>
     </el-form>
 
-
     <el-table :data="tableData" style="width: 100%" border stripe size="small" v-loading="loading"
       :element-loading-text="$t('common.loading')" element-loading-spinner="el-icon-loading">
-
       <el-table-column :label="$t('gasoline.recorddate')" prop="recorddate" :formatter="dateFormat">
       </el-table-column>
       <el-table-column :label="$t('gasoline.spendmoney')" prop="spendmoney">
@@ -48,92 +45,92 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        tableData: [],
-        pageArray: this.$customconfig.pageArray,
-        pagesize: this.$customconfig.pagesize,
-        total: 0,
-        current: 1,
-        loading: true
-      }
+export default {
+  data () {
+    return {
+      tableData: [],
+      pageArray: this.$customconfig.pageArray,
+      pagesize: this.$customconfig.pagesize,
+      total: 0,
+      current: 1,
+      loading: true
+    }
+  },
+  mounted () {
+    this.loadList()
+  },
+  methods: {
+    loadList () {
+      this.$http.get(this.$apiList.gasolinepage, {
+        params: {
+          current: this.$data.current,
+          size: this.$data.pagesize
+        }
+      })
+        .then((successResponse) => {
+          if (successResponse.data.code === 0) {
+            this.tableData = successResponse.data.data.records
+            this.total = successResponse.data.data.total
+          }
+          this.loading = false
+        })
+        .catch(() => {
+          this.loading = false
+        })
     },
-    mounted() {
-      this.loadList()
+    dateFormat (row, column, cellValue, index) {
+      return new Date(cellValue).Format('yyyy-MM-dd')
     },
-    methods: {
-      loadList() {
-        this.$http.get(this.$apiList.gasolinepage, {
-            params: {
-              current: this.$data.current,
-              size: this.$data.pagesize
-            }
-          })
+    handleEdit (index, row) {
+      this.$router.replace({
+        name: 'GasolineEdit',
+        query: {
+          id: row.id
+        }
+      })
+    },
+    handleDelete (index, row) {
+      this.$local.confirm(() => {
+        this.$http
+          .post(this.$apiList.deletegasoline, this.$qs.stringify({
+            id: row.id
+          }))
           .then((successResponse) => {
             if (successResponse.data.code === 0) {
-              this.tableData = successResponse.data.data.records
-              this.total = successResponse.data.data.total
+              this.loadList()
+              this.$notify.success()
+            } else {
+              this.$notify.warning()
             }
-            this.loading = false
           })
-          .catch(() => {
-            this.loading = false
+          .catch((failResponse) => {
+            console.log(failResponse)
+            this.$notify.error()
           })
-      },
-      dateFormat(row, column, cellValue, index) {
-        return new Date(cellValue).Format('yyyy-MM-dd')
-      },
-      handleEdit(index, row) {
-        this.$router.replace({
-          name: 'GasolineEdit',
-          query: {
-            id: row.id
-          }
-        })
-      },
-      handleDelete(index, row) {
-        this.$local.confirm(() => {
-          this.$http
-            .post(this.$apiList.deletegasoline, this.$qs.stringify({
-              id: row.id
-            }))
-            .then((successResponse) => {
-              if (successResponse.data.code === 0) {
-                this.loadList()
-                this.$notify.success()
-              } else {
-                this.$notify.warning()
-              }
-            })
-            .catch((failResponse) => {
-              console.log(failResponse)
-              this.$notify.error()
-            })
-        })
-      },
-      handleSizeChange(val) {
-        this.$data.pagesize = val
-        this.loadList()
-      },
-      handleCurrentChange(val) {
-        this.$data.current = val
-        this.loadList()
-      },
-      onSubmit() {
-        this.loadList()
-      },
-      onReset() {
-        this.$refs.form.resetFields()
-        this.loadList()
-      },
-      onAdd() {
-        this.$router.replace({
-          name: 'GasolineEdit'
-        })
-      }
+      })
+    },
+    handleSizeChange (val) {
+      this.$data.pagesize = val
+      this.loadList()
+    },
+    handleCurrentChange (val) {
+      this.$data.current = val
+      this.loadList()
+    },
+    onSubmit () {
+      this.loadList()
+    },
+    onReset () {
+      this.$refs.form.resetFields()
+      this.loadList()
+    },
+    onAdd () {
+      this.$router.replace({
+        name: 'GasolineEdit'
+      })
     }
   }
+}
 </script>
 
 <style scoped>

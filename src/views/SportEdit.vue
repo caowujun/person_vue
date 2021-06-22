@@ -58,7 +58,9 @@ export default {
   },
   computed: {
     pagetitle: function () {
-      return ''// this.id === undefined ? this.$t('form.add') : this.$t('form.edit');
+      // return   this.id === undefined ? this.$t('form.add') : this.$t('form.edit');
+      return this.$t('sidemenu.sportlist') + '/' + this.id === undefined ? this.$t('form.add') : this.$t(
+        'form.edit')
     }
   },
   methods: {

@@ -50,7 +50,7 @@ export default {
         }],
         enumvalue: [{
           required: true,
-           message: this.$t('rule.required'),
+          message: this.$t('rule.required'),
           trigger: 'blur'
         }],
         enumtype: [{

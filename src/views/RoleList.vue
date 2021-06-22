@@ -3,11 +3,11 @@
     <div slot="header" class="clearfix el-card__header1">
       <span>
         <i class="el-icon-share"></i>
-        角色列表</span>
+          {{$t('sidemenu.rolelist')}}</span>
     </div>
     <el-form :inline="true" :model="formInline" class="demo-form-inline" style="text-align: left;" ref="form" size="small">
       <el-form-item prop="title">
-        <el-input v-model="formInline.title" placeholder="名称" class="input150"></el-input>
+        <el-input v-model="formInline.title" :placeholder="$t('role.title')" class="input150"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" plain @click="onSubmit" size="small" icon="el-icon-search"> {{$t('form.search')}}
@@ -20,27 +20,30 @@
     </el-form>
     <el-table :data="tableData" style="width: 100%" border stripe size="small" v-loading="loading"  :element-loading-text="$t('common.loading')"
       element-loading-spinner="el-icon-loading">
-      <el-table-column label="角色名称" prop="title">
+      <el-table-column :label="$t('role.title')" prop="title">
         <template slot-scope="scope">
           {{scope.row.parentid==="root"?scope.row.title:"-----"+scope.row.title}}
         </template>
       </el-table-column>
 
-      <el-table-column label="是否启用" prop="status">
-        <template slot-scope="scope">
-          <span v-if="scope.row.status === 0" class="red">禁用</span>
-          <span v-if="scope.row.status === 1" class="green">启用</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" align="center" width="300px">
-        <template slot-scope="scope">
-          <el-button size="mini" plain @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">编辑</el-button>
-          <el-button size="mini" type="danger" plain v-if="scope.row.status==1" @click="changeStatus(scope.$index, scope.row)"
-            icon="el-icon-lock">禁用</el-button>
-          <el-button size="mini" type="primary" plain v-else @click="changeStatus(scope.$index, scope.row)" icon="el-icon-unlock">启用</el-button>
-          <el-button size="mini" plain @click="assign(scope.$index, scope.row)" icon="el-icon-edit">分配</el-button>
-        </template>
-      </el-table-column>
+     <el-table-column :label="$t('customconfig.status')" prop="status">
+       <template slot-scope="scope">
+         <span v-if="scope.row.status === 0" class="red">{{$t('common.disenable')}}</span>
+         <span v-if="scope.row.status === 1" class="green">{{$t('common.enbale')}}</span>
+       </template>
+     </el-table-column>
+     <el-table-column :label="$t('common.operation')" align="center" width="300px">
+       <template slot-scope="scope">
+         <el-button size="mini" plain @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">
+           {{$t('form.edit')}}</el-button>
+         <el-button size="mini" type="danger" plain v-if="scope.row.status==1"
+           @click="changeStatus(scope.$index, scope.row)" icon="el-icon-lock">{{$t('common.disenable')}}</el-button>
+         <el-button size="mini" type="primary" plain v-else @click="changeStatus(scope.$index, scope.row)"
+           icon="el-icon-unlock">{{$t('common.enbale')}}</el-button>
+              <el-button size="mini" plain @click="assign(scope.$index, scope.row)" icon="el-icon-edit">{{$t('form.assign')}}</el-button>
+       </template>
+     </el-table-column>
+
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
@@ -103,12 +106,10 @@ export default {
     handleSizeChange (val) {
       this.$data.pagesize = val
       this.loadRoleList()
-      console.log(`每页 ${val} 条`)
     },
     handleCurrentChange (val) {
       this.$data.current = val
       this.loadRoleList()
-      console.log(`当前页: ${val}`)
     },
     loadRoleList () {
       this.$http.get(this.$apiList.rolepage, {

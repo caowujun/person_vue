@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card" shadow="hover">
     <div slot="header" class="clearfix">
-      <el-page-header @back="goBack" content="用户-角色分配">
+      <el-page-header @back="goBack" :content="$t('role.roleassign')">
       </el-page-header>
     </div>
     <el-tree :data="roledata" show-checkbox node-key="id" default-expand-all id="roletree" ref="roletree" :props="defaultProps"

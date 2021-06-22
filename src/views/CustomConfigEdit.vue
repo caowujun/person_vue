@@ -4,7 +4,8 @@
       <el-page-header @back="goBack" :content="pagetitle">
       </el-page-header>
     </div>
-    <el-form ref="form" :model="form" label-width="180px" :rules="rules" hide-required-asterisk status-icon size="small">
+    <el-form ref="form" :model="form" label-width="180px" :rules="rules" hide-required-asterisk status-icon
+      size="small">
       <el-form-item :label="$t('customconfig.configkey')" prop="configkey">
         <el-input v-model.trim="form.configkey" class="input380"></el-input>
       </el-form-item>
@@ -17,11 +18,12 @@
       <el-form-item :label="$t('customconfig.status')">
         <el-switch v-model="form.status"></el-switch>
       </el-form-item>
-     <el-form-item>
-       <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check" size="small"> {{$t('form.save')}}
-       </el-button>
-       <el-button @click="goBack" plain icon="el-icon-circle-close" size="small"> {{$t('form.cancel')}}</el-button>
-     </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click.prevent="onSubmit" plain icon="el-icon-circle-check" size="small">
+          {{$t('form.save')}}
+        </el-button>
+        <el-button @click="goBack" plain icon="el-icon-circle-close" size="small"> {{$t('form.cancel')}}</el-button>
+      </el-form-item>
     </el-form>
   </el-card>
 </template>
@@ -41,17 +43,17 @@ export default {
       rules: {
         configkey: [{
           required: true,
-         message: this.$t('rule.required'),
+          message: this.$t('rule.required'),
           trigger: 'blur'
         }],
         configvalue: [{
           required: true,
-         message: this.$t('rule.required'),
+          message: this.$t('rule.required'),
           trigger: 'blur'
         }],
         note: [{
           required: true,
-         message: this.$t('rule.required'),
+          message: this.$t('rule.required'),
           trigger: 'blur'
         }]
       }

@@ -1,23 +1,21 @@
 <template>
-  <el-dialog title="个人基本信息" :visible.sync="isshow" width="33%">
+  <el-dialog :title="$t('user.personinfo')" :visible.sync="isshow" width="33%">
     <el-form ref="form" :model="form" label-width="150px" hide-required-asterisk status-icon size="small">
-      <el-form-item label="中文名" prop="cnname">
+      <el-form-item :label="$t('user.cnname')" prop="cnname">
         <el-input v-model="form.cnname" class="input"></el-input>
       </el-form-item>
-<!--      <el-form-item label="身份证号" prop="idno">
-        <el-input v-model="form.idno" class="input"></el-input>
-      </el-form-item> -->
-      <el-form-item label="手机号" prop="phone">
-        <el-input v-model="form.phone" class="input"></el-input>
+      <el-form-item :label="$t('user.phonenum')" prop="phonenum">
+        <el-input v-model="form.phonenum" class="input"></el-input>
       </el-form-item>
-      <el-form-item label="登录名" prop="loginname">
-        <el-input v-model="form.loginname" class="input"></el-input>
+      <el-form-item :label="$t('user.username')" prop="username">
+        <el-input v-model="form.username" class="input"></el-input>
       </el-form-item>
     </el-form>
 
     <div slot="footer" class="dialog-footer">
-      <!-- <el-button @click="dialogFormVisible = false">取 消</el-button> -->
-      <el-button type="primary" @click="close">关 闭</el-button>
+     <el-button @click="close"> {{$t('tip.cancel')}}</el-button>
+     <el-button type="primary" @click="close"> {{$t('tip.confirm')}}</el-button>
+      <!-- <el-button type="primary" @click="close">{{$t('tip.close')}}</el-button> -->
     </div>
   </el-dialog>
 </template>
@@ -29,9 +27,8 @@ export default {
     return {
       form: {
         cnname: '',
-        // idno: '',
-        phone: '',
-        loginname: ''
+        phonenum: '',
+        username: ''
       }
     }
   },
@@ -62,7 +59,7 @@ export default {
     loadData () {
       this.$http.get(this.$apiList.loaduserbyloginname, {
         params: {
-          loginname: this.$store.state.user.loginname
+          username: this.$store.state.user.username
         }
       })
         .then((successResponse) => {

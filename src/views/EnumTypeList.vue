@@ -19,8 +19,9 @@
         <el-button type="warning" plain @click="onReset" size="small" icon="el-icon-refresh"> {{$t('form.refresh')}}
         </el-button>
         <el-button type="success" plain @click="onAdd" size="small" icon="el-icon-circle-plus-outline">
-          {{$t('form.add')}} </el-button>
-      </el-button>
+          {{$t('form.add')}}
+           </el-button>
+
      </el-form-item>
     </el-form>
     <el-table :data="tableData" style="width: 100%" border stripe size="small" v-loading="loading"  :element-loading-text="$t('common.loading')"
@@ -47,12 +48,14 @@
         </template>
       </el-table-column>
       <el-table-column :label="$t('common.operation')"  align="center" width="200px">
-        <template slot-scope="scope">
-          <!-- <el-button size="mini" plain @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">编辑</el-button> -->
-          <el-button size="mini" type="danger" plain v-if="scope.row.status==1" @click="changeStatus(scope.$index, scope.row)"
-            icon="el-icon-lock">{{$t('common.status')}}</el-button>
-          <el-button size="mini" type="primary" plain v-else @click="changeStatus(scope.$index, scope.row)" icon="el-icon-unlock">{{$t('common.enbale')}}</el-button>
-        </template>
+       <template slot-scope="scope">
+<!--         <el-button size="mini" plain @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">
+           {{$t('form.edit')}}</el-button> -->
+         <el-button size="mini" type="danger" plain v-if="scope.row.status==1"
+           @click="changeStatus(scope.$index, scope.row)" icon="el-icon-lock">{{$t('common.disenable')}}</el-button>
+         <el-button size="mini" type="primary" plain v-else @click="changeStatus(scope.$index, scope.row)"
+           icon="el-icon-unlock">{{$t('common.enbale')}}</el-button>
+       </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -97,12 +100,10 @@ export default {
     handleSizeChange (val) {
       this.$data.pagesize = val
       this.loadEnumConfigList()
-      console.log(`每页 ${val} 条`)
     },
     handleCurrentChange (val) {
       this.$data.current = val
       this.loadEnumConfigList()
-      console.log(`当前页: ${val}`)
     },
     loadEnumConfigList () {
       this.$http.get(this.$apiList.enumconfigpage, {

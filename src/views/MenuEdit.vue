@@ -54,7 +54,7 @@ export default {
       rules: {
         title: [{
           required: true,
-           message: this.$t('rule.required'),
+          message: this.$t('rule.required'),
           trigger: 'blur'
         }]
       }
@@ -120,7 +120,7 @@ export default {
               console.log(successResponse)
               if (successResponse.data.code === 0) {
                 this.$notify.success()
-                 this.goBack()
+                this.goBack()
                 // this.menuid = successResponse.data.data
               } else {
                 this.$notify.warning()

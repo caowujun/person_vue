@@ -1,44 +1,47 @@
 <template>
-  <el-dialog title="改密码" :visible.sync="isshow"  width="33%">
-    <el-form ref="form" :model="form" :rules="rules" label-width="150px" hide-required-asterisk status-icon size="small">
+  <el-dialog :title="$t('user.modifypsd')" :visible.sync="isshow" width="33%">
+    <el-form ref="form" :model="form" :rules="rules" label-width="150px" hide-required-asterisk status-icon
+      size="small">
 
-      <el-form-item label="原密码" prop="oldpsd">
+      <el-form-item :label="$t('user.oldpsd')" prop="oldpsd">
         <el-input v-model="form.oldpsd" class="input" show-password></el-input>
       </el-form-item>
-      <el-form-item label="新密码" prop="newpsd">
+      <el-form-item :label="$t('user.newpsd')" prop="newpsd">
         <el-input v-model="form.newpsd" class="input" show-password></el-input>
       </el-form-item>
-      <el-form-item label="确认信密码" prop="confirmnewpsd">
+      <el-form-item :label="$t('user.confirmpsd')" prop="confirmnewpsd">
         <el-input v-model="form.confirmnewpsd" class="input" show-password></el-input>
       </el-form-item>
 
     </el-form>
 
     <div slot="footer" class="dialog-footer">
-      <el-button @click="close">取 消</el-button>
-      <el-button type="primary" @click="save">确 定</el-button>
+      <el-button @click="close"> {{$t('tip.cancel')}}</el-button>
+      <el-button type="primary" @click="save"> {{$t('tip.confirm')}}</el-button>
     </div>
   </el-dialog>
 </template>
 
 <script>
 import {
-  validatePsdReg
+  validatePsdReg, validateConfirmPsdReg
 } from '@/assets/js/rules.js'
 
 export default {
   name: 'UserChangePsd',
   data () {
-    const validateConfirmPsdReg = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('请再次输入密码'))
-      }
-      if (value !== this.form.newpsd) {
-        callback(new Error('两次输入的密码不一致'))
-      } else {
-        callback()
-      }
-    }
+    // const validateConfirmPsdReg = (rule, value, callback) => {
+    //   if (!value) {
+    //     let message = this.$t('rule.validatePsdReg'),
+    //       return callback(new Error(message))
+    //   }
+    //   if (value !== this.form.newpsd) {
+    //     let message = this.$t('rule.psdInconsistent'),
+    //       callback(new Error(message))
+    //   } else {
+    //     callback()
+    //   }
+    // }
 
     return {
       form: {
@@ -49,17 +52,32 @@ export default {
       rules: { // 校验表单规则
         oldpsd: [{
           required: true,
-          message: '密码不能为空',
+          message: this.$t('rule.required'),
           trigger: 'blur'
         }],
         newpsd: [{
           validator: validatePsdReg,
+          trigger: 'blur',
+          message: this.$t('rule.validatepsdreg')
+        },
+        {
+          required: true,
+          message: this.$t('rule.required'),
           trigger: 'blur'
-        }],
-        confirmnewpsd: [{
-          validator: validateConfirmPsdReg,
-          trigger: 'blur'
-        }]
+        }
+        ],
+        confirmnewpsd: [
+          {
+            required: true,
+            message: this.$t('rule.required'),
+            trigger: 'blur'
+          },
+          {
+            validator: validateConfirmPsdReg,
+            trigger: 'blur',
+            newpsd: this.form.newpsd,
+            message: this.$t('rule.validateconfirmpsdreg')
+          }]
       }
     }
   },

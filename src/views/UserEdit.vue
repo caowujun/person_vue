@@ -6,20 +6,20 @@
     </div>
     <el-form ref="form" :model="form" label-width="180px" :rules="rules" hide-required-asterisk status-icon size="small">
 
-      <el-form-item label="登录名" prop="username">
+      <el-form-item :label="$t('user.username')" prop="username">
         <el-input v-model="form.username" class="input" :disabled="this.userid === undefined?false:true"></el-input>
       </el-form-item>
 
-      <el-form-item label="中文名" prop="cnname">
+      <el-form-item :label="$t('user.cnname')" prop="cnname">
         <el-input v-model="form.cnname" class="input380"></el-input>
       </el-form-item>
 <!--      <el-form-item label="身份证号" prop="idcard">
         <el-input v-model="form.idcard" class="input380"></el-input>
       </el-form-item> -->
-      <el-form-item label="手机号" prop="phonenum">
+      <el-form-item :label="$t('user.phonenum')" prop="phonenum">
         <el-input v-model="form.phonenum" class="input380"></el-input>
       </el-form-item>
-      <el-form-item label="是否启用">
+      <el-form-item :label="$t('user.status')">
         <el-switch v-model="form.status"></el-switch>
       </el-form-item>
 
@@ -53,7 +53,7 @@ export default {
         phonenum: '',
         status: true // 开关不支持数值类型
       },
-      userid: '',
+      id: '',
       rules: {
         username: [{
           required: true,
@@ -92,7 +92,9 @@ export default {
   },
   computed: {
     pagetitle: function () {
-      return this.userid === undefined ? '新增' : '编辑'
+      return this.$t('sidemenu.userlist') + '/' + this.id === undefined ? this.$t('form.add') : this.$t(
+        'form.edit')
+      // return this.userid === undefined ? '新增' : '编辑'
     }
   },
   methods: {
@@ -105,7 +107,7 @@ export default {
     loadData () {
       this.$http.get(this.$apiList.loaduserbyid, {
         params: {
-          id: this.userid
+          id: this.id
         }
       })
         .then((successResponse) => {
@@ -129,7 +131,8 @@ export default {
               console.log(successResponse)
               if (successResponse.data.code === 0) {
                 this.$notify.success()
-                this.userid = successResponse.data.data
+                // this.id = successResponse.data.data
+                this.goBack()
               } else {
                 this.$notify.warning()
               }
@@ -146,7 +149,7 @@ export default {
     }
   },
   mounted () {
-    this.userid = this.$route.query.id
+    this.id = this.$route.query.id
     if (this.$route.query.id !== undefined) {
       this.loadData()
     }

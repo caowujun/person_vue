@@ -20,14 +20,14 @@
     </el-form>
     <el-table :data="tableData" style="width: 100%" border stripe size="small" v-loading="loading"  :element-loading-text="$t('common.loading')"
       element-loading-spinner="el-icon-loading">
-      <el-table-column label="菜单名称" prop="title">
+      <el-table-column :label="$t('menu.title')" prop="title">
         <template slot-scope="scope">
           {{scope.row.parentid==="root"?scope.row.title:"-----"+scope.row.title}}
         </template>
       </el-table-column>
-      <el-table-column label="菜单链接地址" prop="actionurl">
+      <el-table-column :label="$t('menu.actionurl')" prop="actionurl">
       </el-table-column>
-      <el-table-column label="图标" prop="icon">
+      <el-table-column :label="$t('menu.icon')" prop="icon">
       </el-table-column>
     <el-table-column :label="$t('menu.status')"  prop="status">
       <template slot-scope="scope">
@@ -35,13 +35,15 @@
         <span v-if="scope.row.status === 1" class="green">{{$t('common.enbale')}}</span>
       </template>
     </el-table-column>
-      <el-table-column label="操作" align="center" width="300px">
-        <template slot-scope="scope">
-          <el-button size="mini" plain @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">编辑</el-button>
-          <el-button size="mini" type="danger" plain v-if="scope.row.status==1" @click="changeStatus(scope.$index, scope.row)"
-            icon="el-icon-lock">禁用</el-button>
-          <el-button size="mini" type="primary" plain v-else @click="changeStatus(scope.$index, scope.row)" icon="el-icon-unlock">启用</el-button>
-        </template>
+      <el-table-column :label="$t('common.operation')" align="center" width="300px">
+      <template slot-scope="scope">
+        <el-button size="mini" plain @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">
+          {{$t('form.edit')}}</el-button>
+        <el-button size="mini" type="danger" plain v-if="scope.row.status==1"
+          @click="changeStatus(scope.$index, scope.row)" icon="el-icon-lock">{{$t('common.disenable')}}</el-button>
+        <el-button size="mini" type="primary" plain v-else @click="changeStatus(scope.$index, scope.row)"
+          icon="el-icon-unlock">{{$t('common.enbale')}}</el-button>
+      </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -91,12 +93,10 @@ export default {
     handleSizeChange (val) {
       this.$data.pagesize = val
       this.loadMenuList()
-      console.log(`每页 ${val} 条`)
     },
     handleCurrentChange (val) {
       this.$data.current = val
       this.loadMenuList()
-      console.log(`当前页: ${val}`)
     },
     loadMenuList () {
       this.$http.get(this.$apiList.menupage, {

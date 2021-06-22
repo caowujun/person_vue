@@ -153,16 +153,7 @@ export function validatAlphabets (val) {
   const reg = /^[A-Za-z]+$/
   return reg.test(val)
 }
-export const validatePsdReg = (rule, value, callback) => {
-  if (!value) {
-    return callback(new Error('请输入密码'))
-  }
-  if (!/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){6,20}$/.test(value)) {
-    callback(new Error('请输入6-20位英文字母、数字或者符号（除空格），且字母、数字和标点符号至少包含两种'))
-  } else {
-    callback()
-  }
-}
+
 export const validateChina = (rule, value, callback) => {
   if (!value) {
     return callback(new Error('请输入中文'))
@@ -183,6 +174,18 @@ export const validateDate = (rule, value, callback) => {
     callback()
   }
 }
+
+export const validateCode = (rule, value, callback) => {
+  if (!value) {
+    return callback(new Error('请输入账号'))
+  }
+  if (!/^(?![0-9]*$)(?![a-zA-Z]*$)[a-zA-Z0-9]{6,20}$/.test(value)) {
+    callback(new Error('账号必须为6-20位字母和数字组合'))
+  } else {
+    callback()
+  }
+}
+
 // 2位小数
 export const isTwoDecimal = (rule, value, callback, message) => {
   if (!/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/.test(value)) {
@@ -198,12 +201,21 @@ export function isIntegerNotMust (rule, value, callback, message) {
     callback()
   }
 }
-export const validateCode = (rule, value, callback) => {
-  if (!value) {
-    return callback(new Error('请输入账号'))
+// 请输入6-20位英文字母、数字或者符号（除空格），且字母、数字和标点符号至少包含两种
+export const validatePsdReg = (rule, value, callback, message) => {
+  // if (!value) {
+  //   return callback(new Error(message1))
+  // }
+  if (!/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){6,20}$/.test(value)) {
+    callback(new Error(message))
+  } else {
+    callback()
   }
-  if (!/^(?![0-9]*$)(?![a-zA-Z]*$)[a-zA-Z0-9]{6,20}$/.test(value)) {
-    callback(new Error('账号必须为6-20位字母和数字组合'))
+}
+
+export const validateConfirmPsdReg = (rule, value, callback, newpsd, message) => {
+  if (value !== newpsd) {
+    callback(new Error(message))
   } else {
     callback()
   }

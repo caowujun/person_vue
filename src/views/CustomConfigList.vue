@@ -59,105 +59,103 @@
 </template>
 
 <script>
-  // import api from "@/assets/js/api.js"
-  export default {
-    data() {
-      return {
-        tableData: [],
-        formInline: {
-          configkey: '',
-          description: ''
-        },
-        pageArray: this.$customconfig.pageArray,
-        pagesize: this.$customconfig.pagesize,
-        total: 0,
-        current: 1,
-        loading: true
-      }
+// import api from "@/assets/js/api.js"
+export default {
+  data () {
+    return {
+      tableData: [],
+      formInline: {
+        configkey: '',
+        description: ''
+      },
+      pageArray: this.$customconfig.pageArray,
+      pagesize: this.$customconfig.pagesize,
+      total: 0,
+      current: 1,
+      loading: true
+    }
+  },
+  mounted () {
+    this.loadCustomConfigList()
+  },
+  methods: {
+    indexMethod (index) {
+      return this.pagesize * (this.current - 1) + index + 1
     },
-    mounted() {
+    handleEdit (index, row) {
+      this.$router.replace({
+        name: 'CustomConfigEdit',
+        query: {
+          id: row.id
+        }
+      })
+      console.log(index, row)
+    },
+    handleSizeChange (val) {
+      this.$data.pagesize = val
       this.loadCustomConfigList()
     },
-    methods: {
-      indexMethod(index) {
-        return this.pagesize * (this.current - 1) + index + 1
-      },
-      handleEdit(index, row) {
-        this.$router.replace({
-          name: 'CustomConfigEdit',
-          query: {
-            id: row.id
+    handleCurrentChange (val) {
+      this.$data.current = val
+      this.loadCustomConfigList()
+    },
+    loadCustomConfigList () {
+      this.$http.get(this.$apiList.customconfigpage, {
+        params: {
+          current: this.$data.current,
+          size: this.$data.pagesize,
+          configkey: this.$data.formInline.configkey,
+          description: this.$data.formInline.description
+        }
+      })
+        .then((successResponse) => {
+          if (successResponse.data.code === 0) {
+            this.tableData = successResponse.data.data.records
+            this.total = successResponse.data.data.total
+          }
+          this.loading = false
+          console.log(successResponse.data.data) // 请求的返回体
+        })
+        .catch((error) => {
+          this.loading = false
+          console.log(error) // 异常
+        })
+    },
+    changeStatus (index, row) {
+      this.$http.post(this.$apiList.updatecustomconfigstatus, {
+        id: row.id,
+        isenable: row.isenable === 0 ? 1 : 0
+      })
+        .then(successResponse => {
+          console.log(successResponse)
+          if (successResponse.data.code === 0) {
+            row.isenable = row.isenable === 0 ? 1 : 0
+            this.$notify.success()
+          } else {
+            this.$notify.warning()
+            // alert(successResponse.data.msg);
           }
         })
-        console.log(index, row)
-      },
-      handleSizeChange(val) {
-        this.$data.pagesize = val
-        this.loadCustomConfigList()
-        console.log(`每页 ${val} 条`)
-      },
-      handleCurrentChange(val) {
-        this.$data.current = val
-        this.loadCustomConfigList()
-        console.log(`当前页: ${val}`)
-      },
-      loadCustomConfigList() {
-        this.$http.get(this.$apiList.customconfigpage, {
-            params: {
-              current: this.$data.current,
-              size: this.$data.pagesize,
-              configkey: this.$data.formInline.configkey,
-              description: this.$data.formInline.description
-            }
-          })
-          .then((successResponse) => {
-            if (successResponse.data.code === 0) {
-              this.tableData = successResponse.data.data.records
-              this.total = successResponse.data.data.total
-            }
-            this.loading = false
-            console.log(successResponse.data.data) // 请求的返回体
-          })
-          .catch((error) => {
-            this.loading = false
-            console.log(error) // 异常
-          })
-      },
-      changeStatus(index, row) {
-        this.$http.post(this.$apiList.updatecustomconfigstatus, {
-            id: row.id,
-            isenable: row.isenable === 0 ? 1 : 0
-          })
-          .then(successResponse => {
-            console.log(successResponse)
-            if (successResponse.data.code === 0) {
-              row.isenable = row.isenable === 0 ? 1 : 0
-              this.$notify.success()
-            } else {
-              this.$notify.warning()
-              // alert(successResponse.data.msg);
-            }
-          })
-          .catch(failResponse => {
-            console.log(failResponse)
-            this.$notify.error()
-            // alert(failResponse);
-          })
-      },
-      onSubmit() {
-        this.loadCustomConfigList()
-      },
-      onReset() {
-        this.$refs.form.resetFields()
-        this.loadCustomConfigList()
-      },
-      onAdd() {
-        this.$router.replace({
-          name: 'CustomConfigEdit'
+        .catch(failResponse => {
+          console.log(failResponse)
+          this.$notify.error()
+          // alert(failResponse);
         })
-      }
+    },
+    onSubmit () {
+      this.loadCustomConfigList()
+    },
+    onReset () {
+      this.$refs.form.resetFields()
+      this.loadCustomConfigList()
+    },
+    onAdd () {
+      this.$router.replace({
+        name: 'CustomConfigEdit'
+      })
     }
   }
+}
 </script>
 
 <style scoped>

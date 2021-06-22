@@ -13,7 +13,6 @@
         <el-button type="success" plain @click="onAdd" size="small" icon="el-icon-circle-plus-outline">
           {{$t('form.add')}} </el-button>
 
-        </el-button>
       </el-form-item>
     </el-form>
 

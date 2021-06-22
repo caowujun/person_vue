@@ -5,20 +5,20 @@
       </el-page-header>
     </div>
     <el-form ref="form" :model="form" label-width="180px" :rules="rules" hide-required-asterisk status-icon size="small">
-      <el-form-item v-if="isnew" label="父节点" prop="parentid">
-        <el-select v-model="form.parentid" placeholder="请选择父节点" class="input380">
+      <el-form-item v-if="isnew" :label="$t('role.parentrole')" prop="parentid">
+        <el-select v-model="form.parentid" :placeholder="$t('role.selectparentrole')" class="input380">
           <el-option label="root" value="root"></el-option>
           <el-option v-for="item in parentlist" :label="item.title" :value="item.id" :key="item.id"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="名称" prop="title">
+      <el-form-item :label="$t('role.title')" prop="title">
         <el-input v-model="form.title" class="input380"></el-input>
       </el-form-item>
-      <el-form-item label="是否启用">
+      <el-form-item :label="$t('role.status')">
         <el-switch v-model="form.status"></el-switch>
       </el-form-item>
-      <el-form-item label="描述">
-        <el-input v-model="form.description" class="input380"></el-input>
+      <el-form-item :label="$t('role.note')">
+        <el-input v-model="form.note" class="input380"></el-input>
       </el-form-item>
       <el-form-item>
        <el-form-item>
@@ -46,11 +46,11 @@ export default {
         parentid: ''
       },
       parentlist: [],
-      roleid: '',
+      id: '',
       rules: {
         title: [{
           required: true,
-          message: '名称不能为空',
+          message: this.$t('rule.required'),
           trigger: 'blur'
         }]
       }
@@ -58,11 +58,14 @@ export default {
   },
   computed: {
     isnew: function () {
-      return this.roleid === undefined
+      return this.id === undefined
     },
     pagetitle: function () {
-      return this.roleid === undefined ? '新增' : '编辑'
+      // return this.roleid === undefined ? '新增' : '编辑'
+      return this.$t('sidemenu.rolelist') + '/' + this.id === undefined ? this.$t('form.add') : this.$t(
+        'form.edit')
     }
+
   },
   methods: {
     goBack () {
@@ -90,7 +93,7 @@ export default {
     loadData () {
       this.$http.get(this.$apiList.loadrolebyid, {
         params: {
-          id: this.roleid
+          id: this.id
         }
       })
         .then((successResponse) => {
@@ -115,7 +118,8 @@ export default {
               console.log(successResponse)
               if (successResponse.data.code === 0) {
                 this.$notify.success()
-                this.roleid = successResponse.data.data
+                this.goBack()
+                // this.id = successResponse.data.data
               } else {
                 this.$notify.warning()
               }
@@ -132,7 +136,7 @@ export default {
     }
   },
   mounted () {
-    this.roleid = this.$route.query.id
+    this.id = this.$route.query.id
     if (this.$route.query.id === undefined) {
       this.loadParentData()
     } else {

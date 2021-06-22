@@ -43,7 +43,8 @@ export default {
     cancel: '取消',
     dateplaceholder: '选择日期',
     areaplaceholder: '请输入内容',
-    importfile: '导入'
+    importfile: '导入',
+    assign: '分配'
   },
   tip: {
     deleteconfirm: '数据将被删除, 是否确定？',
@@ -101,16 +102,40 @@ export default {
   menu: {
     parentmenu: '父菜单',
     selectparentmenu: '请选择父菜单',
-    menuname: '菜单名',
+    title: '菜单名',
     status: '是否启用',
     actionurl: '链接',
     icon: '图标'
   },
+  role: {
+    roleassign: '权限分配',
+    userassign: '用户分配',
+    menuassign: '菜单分配',
+    parentrole: '父角色',
+    selectparentrole: '请选择父角色',
+    title: '角色名',
+    status: '是否启用',
+    note: '备注'
+  },
+  user: {
+    modifypsd: '修改密码',
+    oldpsd: '原密码',
+    newpsd: '新密码',
+    confirmpsd: '确认新密码',
+    personinfo: '个人基本信息',
+    cnname: '中文名',
+    phonenum: '手机号',
+    username: '登录名',
+    status: '是否启用',
+    note: '备注'
+  },
   rule: {
     required: '必填项',
-    needDate: '请选择日期',
-    needInteger: '请填写正整数',
-    needTwoDecimal: '请填写两位小数'
+    needdate: '请选择日期',
+    needinteger: '请填写正整数',
+    needtwodecimal: '请填写两位小数',
+    validatepsdreg: '请输入6-20位英文字母、数字或者符号（除空格），且字母、数字和标点符号至少包含两种',
+    validateconfirmpsdreg: '两次输入的密码不一致'
   },
   skin: {
     Blue: 'Blue',

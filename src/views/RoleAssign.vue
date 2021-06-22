@@ -1,16 +1,16 @@
 <template>
   <el-card class="box-card" shadow="hover">
     <div slot="header" class="clearfix">
-      <el-page-header @back="goBack" content="权限分配">
+      <el-page-header @back="goBack" :content="$t('role.roleassign')">
       </el-page-header>
     </div>
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-      <el-tab-pane label="用户分配" name="first">
+      <el-tab-pane :label="$t('role.userassign')" name="first">
         <el-tree :data="userdata" show-checkbox node-key="id" default-expand-all id="usertree" ref="usertree" :props="defaultProps"
           @check-change="handleCheckChange1" check-strictly>
         </el-tree>
       </el-tab-pane>
-      <el-tab-pane label="菜单分配" name="second">
+      <el-tab-pane :label="$t('role.menuassign')" name="second">
         <el-tree :data="menudata" show-checkbox node-key="id" default-expand-all id="menutree" ref="menutree" :props="defaultProps"
           @check-change="handleCheckChange2" check-strictly>
         </el-tree>

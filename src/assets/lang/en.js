@@ -43,7 +43,8 @@ export default {
     cancel: 'Cancel',
     dateplaceholder: 'Select date',
     areaplaceholder: 'Please enter content',
-    importfile: 'Import'
+    importfile: 'Import',
+    assign: 'Assign'
   },
   tip: {
     deleteconfirm: 'The data will be deleted, are you sure?',
@@ -101,16 +102,40 @@ export default {
   menu: {
     parentmenu: 'Parent menu',
     selectparentmenu: 'Please select parentmenu',
-    menuname: 'Menu name',
+    title: 'Menu name',
     status: 'Status',
     actionurl: 'Link',
     icon: 'Icon'
+  },
+  role: {
+    roleassign: 'Role assign',
+    userassign: 'User assign',
+    menuassign: 'Menu assign',
+    parentrole: 'Parent rle',
+    selectparentrole: 'Please select parent role',
+    title: 'Role title',
+    status: 'Status',
+    note: 'Note'
+  },
+  user: {
+    modifypsd: 'Modify password',
+    oldpsd: 'Old password',
+    newpsd: 'New password',
+    confirmpsd: 'Confirm the new password',
+    personinfo: 'Basic personal information',
+    cnname: 'Chinese name',
+    phonenum: 'Mobile phone',
+    username: 'Registered name',
+    status: 'Status',
+    note: 'Note'
   },
   rule: {
     required: 'Required',
     needDate: 'Please select a date',
     needInteger: 'Please fill in a positive integer',
-    needtwodecimal: 'Please fill in two decimal places'
+    needtwodecimal: 'Please fill in two decimal places',
+    validatepsdreg: 'Request import 6th-20th place English letter mother, number or person code (empty case), character mother, number sum punctuation mark minimum inclusion two types',
+    validateconfirmpsdreg: 'The two passwords entered are inconsistent'
   },
   skin: {
     Blue: 'Blue',

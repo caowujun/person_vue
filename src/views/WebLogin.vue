@@ -7,15 +7,15 @@
       <h3 class="login_title">{{webtitle}}</h3>
       <p style="color:orangered" v-show="showerror">{{errormsg}}</p>
       <el-form-item prop="username">
-        <el-input v-model="form.username" placeholder="请输入用户名" auto-complete="off">
+        <el-input v-model="form.username" :placeholder="$t('weblogin.usernameplaceholder')" auto-complete="off">
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input type="password" v-model="form.password" placeholder="请输入密码" auto-complete="off" show-password>
+        <el-input type="password" v-model="form.password" :placeholder="$t('weblogin.pwdplaceholder')" auto-complete="off" show-password>
         </el-input>
       </el-form-item>
       <el-form-item>
-        <el-button @click="handleSubmit" type="primary" long class="login_button">登录</el-button>
+        <el-button @click="handleSubmit" type="primary" long class="login_button">{{$t('weblogin.submit')}}</el-button>
       </el-form-item>
     </el-form>
 
@@ -34,16 +34,16 @@ export default {
       showerror: false,
       errormsg: '',
       coverImgUrl: '',
-      webtitle: '欢迎使用个人管理系统',
+      webtitle: this.$t('weblogin.title'),
       ruleslogin: { // 校验表单规则
         username: [{
           required: true,
-          message: '用户名不能为空',
+          message: this.$t('weblogin.usernamerequired'),
           trigger: 'blur'
         }],
         password: [{
           required: true,
-          message: '密码不能为空',
+          message: this.$t('weblogin.pwdrequired'),
           trigger: 'blur'
         }]
       }
@@ -58,8 +58,6 @@ export default {
             userpsd: this.$md5(this.form.password)
           })
             .then(successResponse => {
-              // eslint-disable-next-line no-debugger
-              debugger
               if (successResponse.data.code === 0) {
                 this.$store.commit('login', successResponse)
                 var path = this.$route.query.redirect

@@ -7,15 +7,16 @@
       </span>
     </div>
 
-	<el-form :inline="true" :model="formInline" style="text-align: left;" ref="form" size="small">
-
-	 <el-form-item>
+    <el-form :inline="true" :model="formInline" class="demo-form-inline" style="text-align: left;" ref="form" size="small">
+     <el-form-item  >
         <el-button type="warning" plain @click="onReset" size="small" icon="el-icon-refresh"> {{$t('form.refresh')}}
         </el-button>
         <el-button type="success" plain @click="onAdd" size="small" icon="el-icon-circle-plus-outline">
-          {{$t('form.add')}} </el-button>
-	 </el-form-item>
-	</el-form>
+          {{$t('form.add')}}
+          </el-button>
+      </el-form-item>
+    </el-form>
+
     <el-form :inline="true" :model="formInline" class="demo-form-inline" style="text-align: left;" ref="form"
       size="small">
       <el-form-item prop="note">
@@ -44,8 +45,6 @@
       </el-table-column>
       <el-table-column :label="$t('money.spendnum')" prop="spendnum">
       </el-table-column>
-      <!--      <el-table-column :label="$t('money.note')" prop="note">
-      </el-table-column> -->
       <el-table-column :label="$t('money.type')" prop="moneytype">
         <template slot-scope="scope">
           <span v-if="scope.row.moneytype === 0" class="red"> {{$t('money.out')}}</span>
