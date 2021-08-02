@@ -60,6 +60,7 @@ axios.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     const token = window.localStorage.getItem('token')
+    debugger
     config.headers.Authorization = token
     return config
   },
